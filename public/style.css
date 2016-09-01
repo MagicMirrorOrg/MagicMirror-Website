@@ -7,9 +7,13 @@ html, body {
     margin-bottom: 0px;
 }
 
+.navbar-fixed-top {
+    min-height: 80px;
+}
+
 .navbar-nav > li > a, .navbar-brand {
-    padding-top:0px !important;
-    padding-bottom:0px !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
     line-height: 80px;
 }
 
@@ -69,14 +73,33 @@ p {
 
 .footer {
     border-top: 1px solid #eee;
-    line-height: 40px;
     color: #999;
 }
+.footer .container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 
-/* Extra Small Devices, Phones */
-@media only screen and (max-width : 480px) {
+
+@media (max-width : 480px) {
     h1.logo {
         font-size: 50px;
         font-weight: 100;
+    }
+    .section {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-nav > li > a {
+        line-height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-brand {
+        line-height: 20px;
+        padding-top: 15px;
+        padding-bottom: 10px;
     }
 }
