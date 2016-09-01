@@ -26,6 +26,11 @@ html, body {
     color: #999;
 }
 
+.jumbotron {
+        background-image: url('img/mirror.png');
+        background-position: 600px -100px;
+        background-repeat: no-repeat;
+}
 
 
 .section {
@@ -99,6 +104,9 @@ p {
 }
 
 @media (max-width: 767px) {
+    .jumbotron {
+        background-image: none;
+    }
     .navbar-nav > li > a {
         line-height: 20px;
         padding-top: 10px;
