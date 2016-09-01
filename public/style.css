@@ -72,3 +72,11 @@ p {
     line-height: 40px;
     color: #999;
 }
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+    h1.logo {
+        font-size: 50px;
+        font-weight: 100;
+    }
+}
