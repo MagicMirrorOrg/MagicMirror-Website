@@ -30,8 +30,34 @@ html, body {
         background-image: url('img/mirror.png');
         background-position: 600px -100px;
         background-repeat: no-repeat;
+        position: relative;
 }
 
+.magpi-watermark {
+    position: absolute;
+    z-index: 9999;
+    top: 30px;
+    right: 50%;
+    width: 125px;
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    transform: scale(0,0);
+    animation-fill-mode: forwards;
+    transform-origin: 100% 50%;
+
+    -webkit-filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+    filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0,0) rotate(30deg) translateX(50%);
+    }
+    to {
+        transform: scale(1,1) rotate(-1deg) translateX(50%);
+    }
+}
 
 .section {
     margin-top: 100px;
@@ -106,6 +132,10 @@ p {
 @media (max-width: 767px) {
     .jumbotron {
         background-image: none;
+    }
+    .magpi-watermark {
+        width: 60px;
+        top: 40px;
     }
     .navbar-nav > li > a {
         line-height: 20px;
