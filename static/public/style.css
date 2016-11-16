@@ -1,0 +1,150 @@
+html, body {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.navbar {
+    border-top: 7px solid #2B879E;
+    margin-bottom: 0px;
+}
+
+.navbar-fixed-top {
+    min-height: 80px;
+}
+
+.navbar-nav > li > a, .navbar-brand {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 80px;
+}
+
+.navbar-brand {
+    color: #666 !important;
+    font-weight: 400;
+    font-size: 25px;
+}
+.navbar-brand .two {
+    color: #999;
+}
+
+.jumbotron {
+        background-image: url('img/mirror.png');
+        background-position: 600px -100px;
+        background-repeat: no-repeat;
+        position: relative;
+}
+
+.magpi-watermark {
+    position: absolute;
+    z-index: 9999;
+    top: 30px;
+    right: 50%;
+    width: 125px;
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    transform: scale(0,0);
+    animation-fill-mode: forwards;
+    transform-origin: 100% 50%;
+
+    -webkit-filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+    filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0,0) rotate(30deg) translateX(50%);
+    }
+    to {
+        transform: scale(1,1) rotate(-1deg) translateX(50%);
+    }
+}
+
+.section {
+    margin-top: 100px;
+}
+
+h1.logo {
+    font-size: 100px;
+    font-weight: 100;
+}
+
+h1.logo .two {
+    color: #999;
+}
+
+p {
+    color: #666;
+}
+
+.payoff {
+    color: #666;
+}
+
+.links {
+    margin-bottom: -50px;
+}
+
+.links .btn {
+    margin-bottom: 50px;
+}
+
+.btn-primary {
+    color: #2B879E;
+    border-color: #2B879E;
+    background-color: white;
+}
+.btn-primary:hover {
+    border-color: #2B879E;
+    background-color: #2B879E;
+}
+
+.line {
+    border-bottom: 3px solid #2B879E;
+    width: 75px;
+    display: inline-block;
+
+}
+
+.embed-responsive  {
+    border: 1px solid #999;
+}
+
+.footer {
+    border-top: 1px solid #ddd;
+    color: #999;
+}
+.footer .container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+@media (max-width : 480px) {
+    h1.logo {
+        font-size: 50px;
+        font-weight: 100;
+    }
+    .section {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .jumbotron {
+        background-image: none;
+    }
+    .magpi-watermark {
+        width: 60px;
+        top: 40px;
+    }
+    .navbar-nav > li > a {
+        line-height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-brand {
+        line-height: 20px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+}
