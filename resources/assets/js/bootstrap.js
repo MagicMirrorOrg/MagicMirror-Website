@@ -27,6 +27,7 @@ require('vue-resource');
 
 Vue.http.interceptors.push((request, next) => {
     request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    request.headers.set('Authorization', 'Bearer ' + Laravel.apiToken);
 
     next();
 });

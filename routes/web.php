@@ -20,6 +20,8 @@ Route::get('auth/github', 'AuthController@redirectToProvider');
 Route::get('auth/github/callback', 'AuthController@handleProviderCallback');
 Route::post('logout', 'AuthController@logout');
 
+Route::resource('module', 'ModuleController');
+
 Route::get('/', function() {
 
     // dd('Bearer ' . $accessToken);

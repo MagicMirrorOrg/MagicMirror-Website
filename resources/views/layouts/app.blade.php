@@ -7,6 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="api-token" content="{{ (Auth::user()) ? Auth::user()->api_token : "" }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -17,6 +18,7 @@
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
+            'apiToken' => (Auth::user()) ? Auth::user()->api_token : false
         ]); ?>
     </script>
 </head>
@@ -43,7 +45,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if (!Auth::guest())
+                            <li><a href="{{ action('ModuleController@create') }}">Add Module</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

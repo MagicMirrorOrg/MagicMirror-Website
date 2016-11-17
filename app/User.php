@@ -50,13 +50,19 @@ class User extends Authenticatable
     */
     public function repositories()
     {
-        return collect($this->githubClient()->api('current_user')->repositories())
+        $repositories = array();
+        collect($this->githubClient()->api('current_user')->repositories())
             ->filter(function($repository) {
                 return !$repository['fork'];
             })
             ->sortByDesc(function ($repository) {
                 return $repository['updated_at'];
+            })
+            ->map(function($repository) use(&$repositories) {
+                $repositories[] = $repository;
             });
+
+        return $repositories;
     }
 
     /**
