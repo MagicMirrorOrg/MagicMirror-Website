@@ -1,5 +1,8 @@
 <?php
 
+
+use GrahamCampbell\GitHub\Facades\GitHub;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +15,16 @@
 */
 
 // Auth::routes();
+Route::get('login', 'AuthController@redirectToProvider');
 Route::get('auth/github', 'AuthController@redirectToProvider');
 Route::get('auth/github/callback', 'AuthController@handleProviderCallback');
 Route::post('logout', 'AuthController@logout');
 
 Route::get('/', function() {
+
+    // dd('Bearer ' . $accessToken);
+
+    // dd(Auth::user()->repositories());
+
     return view('welcome');
 });

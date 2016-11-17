@@ -168,6 +168,8 @@ return [
          */
 
         Laravel\Socialite\SocialiteServiceProvider::class,
+        GrahamCampbell\GitHub\GitHubServiceProvider::class,
+
 
         //
 
@@ -180,6 +182,7 @@ return [
         MagicMirror\Providers\EventServiceProvider::class,
         MagicMirror\Providers\RouteServiceProvider::class,
 
+        
     ],
 
     /*
@@ -228,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'GitHub' => GrahamCampbell\GitHub\Facades\GitHub::class
 
     ],
 
