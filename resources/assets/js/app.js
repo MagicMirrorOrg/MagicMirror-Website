@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('addModule', require('./components/AddModule.vue'));
+Vue.component('imageUploader', require('./components/ImageUploader.vue'));
 
 const app = new Vue({
     el: '#app'

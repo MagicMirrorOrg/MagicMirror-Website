@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -45,28 +45,27 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (!Auth::guest())
-                            <li><a href="{{ action('ModuleController@create') }}">Add Module</a></li>
-                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/auth/github') }}">Login</a></li>
+                            <li><a href="{{ url('/auth/github') }}"><i class="fa fa-github" aria-hidden="true"></i> Login with GitHub</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <img src="{{ Auth::user()->avatar }} " alt="Avatar" class="img-circle avatar">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ action('ModuleController@create') }}"><i class="fa fa-fw fa-plus-circle" aria-hidden="true"></i> Add Module</a></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -82,9 +81,17 @@
         </nav>
 
         @yield('content')
+
+        <div class="container-fluid footer">
+            <div class="container text-center">
+                ©2016 <a href="http://michaelteeuw.nl" target="_blank">Michael Teeuw</a>, Xonay Media.
+            </div>
+        </div>
+        
     </div>
 
+    
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
 </body>
 </html>

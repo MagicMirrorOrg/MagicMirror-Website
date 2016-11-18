@@ -16,7 +16,6 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->string('github_id')->unique();
             $table->string('github_url')->unique();
             
             $table->string('name');

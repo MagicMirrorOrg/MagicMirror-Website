@@ -22,6 +22,11 @@ Route::post('logout', 'AuthController@logout');
 
 Route::resource('module', 'ModuleController');
 
+// Add file routes.
+Route::post('/upload', 'FileController@upload');
+Route::get('/file/{file}', 'FileController@fetch');
+Route::get('/image/{file}/{size?}/{quality?}', 'FileController@image');
+
 Route::get('/', function() {
 
     // dd('Bearer ' . $accessToken);

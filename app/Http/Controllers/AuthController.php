@@ -62,7 +62,10 @@ class AuthController extends Controller
     {
         if ($authUser = User::where('github_id', $githubUser->id)->first()) {
 
+            $authUser->name = $githubUser->name;
+            $authUser->email = $githubUser->email;
             $authUser->github_token = $githubUser->token;
+            $authUser->avatar = $githubUser->avatar;
             $authUser->save();
             
             return $authUser;

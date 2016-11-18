@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'MagicMirror²',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +169,7 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
         GrahamCampbell\GitHub\GitHubServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
 
         //
@@ -231,7 +232,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'GitHub' => GrahamCampbell\GitHub\Facades\GitHub::class
+        'GitHub' => GrahamCampbell\GitHub\Facades\GitHub::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 
