@@ -31,7 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'github_token', 'api_token'
+        'password', 'remember_token', 'github_token', 'api_token', 'email'
     ];
 
     /**
@@ -44,25 +44,26 @@ class User extends Authenticatable
     ];
 
     /**
-    * Returns a collection of non forked repositories ordered by update time.
+    * Returns a collection repositories.
     * 
     * @return Collection;
     */
     public function repositories()
     {
-        $repositories = array();
-        collect($this->githubClient()->api('current_user')->repositories())
-            ->filter(function($repository) {
-                return !$repository['fork'];
-            })
-            ->sortByDesc(function ($repository) {
-                return $repository['updated_at'];
-            })
-            ->map(function($repository) use(&$repositories) {
-                $repositories[] = $repository;
-            });
+        return collect($this->githubClient()->api('current_user')->repositories());
+    }
 
-        return $repositories;
+
+    /**
+    * Returns a collection of non forked repositories.
+    * 
+    * @return Collection;
+    */
+    public function nonForkedRepositories()
+    {
+            return $this->repositories()->filter(function($repository) {
+                return !$repository['fork'];
+            });
     }
 
     /**

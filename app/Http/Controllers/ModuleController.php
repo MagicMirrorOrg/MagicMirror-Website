@@ -3,6 +3,7 @@
 namespace MagicMirror\Http\Controllers;
 
 use Illuminate\Http\Request;
+use MagicMirror\Module;
 
 class ModuleController extends Controller
 {
@@ -13,7 +14,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        //
+        return view('module.index')->with('modules', Module::all());
     }
 
     /**
@@ -43,9 +44,11 @@ class ModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Module $module)
     {
-        //
+        $module->views++;
+        $module->save();
+        return view('module.show')->with('module', $module);
     }
 
     /**

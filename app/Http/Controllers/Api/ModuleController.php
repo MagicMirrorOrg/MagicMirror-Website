@@ -16,7 +16,7 @@ class ModuleController extends ApiController
      */
     public function index()
     {
-        //
+        return Module::all();
     }
 
     /**
@@ -40,7 +40,7 @@ class ModuleController extends ApiController
         $this->validate($request, [
             'github_url' => 'required|unique:modules|url',
             'name' => 'required|unique:modules|max:50',
-            'description' => 'max:1000',
+            'description' => 'required|max:256',
             'link' => 'url'
         ]);
 

@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="dropzone-preview" v-else>
-            <img :src="remoteFilePath"  class="img-responsive" />
+            <img :src="remoteFilePath"  class="img-fluid" />
             <button class="btn btn-danger btn-sm" @click="removeImage" ><span class="fa fa-trash"></span> Remove Image</button>
         </div>
         <input type="hidden" v-model="remoteFileName">
@@ -158,6 +158,7 @@
         }
         .dropzone-icon {
             margin-bottom: 10px;
+            color: #999;
         }
         .dropzone-title {
             font-weight: bold;

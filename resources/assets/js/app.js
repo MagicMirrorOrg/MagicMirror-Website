@@ -13,6 +13,8 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('moduleList', require('./components/ModuleList.vue'));
+Vue.component('modulePanel', require('./components/ModulePanel.vue'));
 Vue.component('addModule', require('./components/AddModule.vue'));
 Vue.component('imageUploader', require('./components/ImageUploader.vue'));
 

@@ -2,6 +2,7 @@
 
 
 use GrahamCampbell\GitHub\Facades\GitHub;
+use MagicMirror\Module;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ Route::get('auth/github/callback', 'AuthController@handleProviderCallback');
 Route::post('logout', 'AuthController@logout');
 
 Route::resource('module', 'ModuleController');
+Route::get('/module/{module}', function(Module $module) {
+    return redirect("/module/" . $module->id . "/" . $module->slug);
+});
+Route::get('/module/{module}/{file?}', 'ModuleController@show');
+Route::get('/modules', 'ModuleController@index');
 
 // Add file routes.
 Route::post('/upload', 'FileController@upload');

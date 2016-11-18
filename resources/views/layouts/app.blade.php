@@ -24,69 +24,47 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+
+        <nav class="navbar navbar-dark bg-inverse navbar-full ">
             <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/auth/github') }}"><i class="fa fa-github" aria-hidden="true"></i> Login with GitHub</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <img src="{{ Auth::user()->avatar }} " alt="Avatar" class="img-circle avatar">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                <a class="navbar-brand" href="#">MagicMirror²</a>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a href="{{ url('/modules') }}" class="nav-link"><i class="fa fa-fw fa-plug" aria-hidden="true"></i> Modules</a></li>
+                </ul>
+                <ul class="nav navbar-nav float-lg-right">
+                    @if (Auth::guest())
+                        <li class="nav-item"><a href="{{ url('/auth/github') }}" class="nav-link"><i class="fa fa-github" aria-hidden="true"></i> Login with GitHub</a></li>
+                    @else
+                        <img src="{{ Auth::user()->avatar }} " alt="Avatar" class="rounded-circle avatar">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="responsiveNavbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="responsiveNavbarDropdown">
+                                <a class="dropdown-item" href="{{ action('ModuleController@create') }}">
+                                    <i class="fa fa-fw fa-plus-circle" aria-hidden="true"></i> Add Module
                                 </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ action('ModuleController@create') }}"><i class="fa fa-fw fa-plus-circle" aria-hidden="true"></i> Add Module</a></li>
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout
+                                </a>
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </nav>
 
         @yield('content')
 
-        <div class="container-fluid footer">
-            <div class="container text-center">
-                ©2016 <a href="http://michaelteeuw.nl" target="_blank">Michael Teeuw</a>, Xonay Media.
+        <footer class="footer">
+            <div class="container text-xs-center">
+                <span class="text-muted">MagicMirror² - ©2016 <a href="http://michaelteeuw.nl" target="_blank">Michael Teeuw</a>, Xonay Media.</span>
             </div>
-        </div>
+        </footer>
         
     </div>
 

@@ -18,4 +18,24 @@ class Module extends Model
         'github_id', 'github_url', 'name', 'description', 'image', 'link', 'views', 'user_id'
     ];
 
+    protected $appends = ['slug','url'];
+
+    protected $hidden = ['deleted_at','user_id'];
+
+    protected $with = ['user'];
+
+    public function user() {
+        return $this->belongsTo('MagicMirror\User');
+    }
+
+    public function getSlugAttribute() {
+        return str_slug($this->name);
+    }
+
+    public function getUrlAttribute() {
+        return url('module/' . $this->id . '/' . $this->slug);
+    }
+
+
+
 }
