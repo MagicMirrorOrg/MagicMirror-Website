@@ -33,6 +33,7 @@
                     </div>
 
                     <a href="#" class="list-group-item" v-for="repository in repositories" @click.prevent="selectRepository(repository)">
+                        <!--<a href="#" class="btn btn-default btn-xs pull-right" type="button" @click.stop.prevent="openURL(repository.html_url)"><i class="fa fa-fw fa-eye"></i></a>-->
                         <h4 class="list-group-item-heading">{{repository.name}}</h4>
                         <p class="list-group-item-text">{{repository.description}}</p>
                     </a>
@@ -51,7 +52,12 @@
                                 <label for="moduleURL" class="col-sm-2 control-label">Module URL</label>
                                 <div class="col-sm-10">
                                     <div class="alert alert-danger" v-if="errors.github_url"><i class="fa fa-exclamation-triangle"></i> {{errors.github_url[0]}}</div>
-                                    <input type="text" class="form-control disabled" id="moduleURL" placeholder="URL" disabled="true" v-model="moduleInformation.github_url" @change="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control disabled" id="moduleURL" placeholder="URL" disabled="true" v-model="moduleInformation.github_url" @change="">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" @click.prevent="openURL(moduleInformation.github_url)"><i class="fa fa-fw fa-eye"></i></button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -163,6 +169,9 @@
                     _this.errors = response.data || {};
                     console.error(response);
                 })
+            },
+            openURL(url) {
+                window.open(url);
             }
         },
         mounted() {
