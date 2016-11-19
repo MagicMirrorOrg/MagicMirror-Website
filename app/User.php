@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'github_id', 'avatar', 'github_token', 'api_token'
+        'name', 'email', 'github_id', 'github_user', 'avatar', 'github_token', 'api_token'
     ];
 
     /**
@@ -67,6 +67,16 @@ class User extends Authenticatable
     }
 
     /**
+    * Returns a collection of the user's modules.
+    * 
+    * @return Collection;
+    */
+    public function modules()
+    {
+            return $this->hasMany('MagicMirror\Module', 'github_user', 'github_user');
+    }
+
+    /**
     * Returns an authenticated github client.
     * 
     * @return Github\Client;
@@ -80,4 +90,6 @@ class User extends Authenticatable
         return $this->github;
     }
 
+
+    
 }

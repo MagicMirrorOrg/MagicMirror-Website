@@ -17,6 +17,7 @@ Vue.component('moduleList', require('./components/ModuleList.vue'));
 Vue.component('modulePanel', require('./components/ModulePanel.vue'));
 Vue.component('addModule', require('./components/AddModule.vue'));
 Vue.component('imageUploader', require('./components/ImageUploader.vue'));
+Vue.component('readmeViewer', require('./components/ReadmeViewer.vue'));
 
 const app = new Vue({
     el: '#app'

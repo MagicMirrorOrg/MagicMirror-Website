@@ -38,7 +38,8 @@ class ModuleController extends ApiController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'github_url' => 'required|unique:modules|url',
+            'github_user' => 'required',
+            'github_name' => 'required',
             'name' => 'required|unique:modules|max:50',
             'description' => 'required|max:256',
             'link' => 'url'

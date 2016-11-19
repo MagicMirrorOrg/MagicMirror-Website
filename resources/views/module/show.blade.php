@@ -8,6 +8,12 @@
         </div>
     </div>
 
-   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <readme-viewer module-url="{{$module->github_url}}"></readme-viewer>
+            </div>
+        </div>
+    <div>
 
 @endsection

@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             
             $table->string('github_id')->unique();
+            $table->string('github_user');
             $table->string('name');
             $table->string('email');
             $table->string('avatar');

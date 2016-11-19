@@ -48,9 +48,9 @@
                         <div class="col-md-10">
                             <div class="alert alert-danger" v-if="errors.github_url"><i class="fa fa-exclamation-triangle"></i> {{errors.github_url[0]}}</div>
                             <div class="input-group">
-                                <input type="text" class="form-control disabled" id="moduleURL" placeholder="URL" disabled="true" v-model="moduleInformation.github_url" @change="">
+                                <input type="text" class="form-control disabled" id="moduleURL" placeholder="URL" disabled="true" :value="generateGithubUrl(moduleInformation)">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button" @click.prevent="openURL(moduleInformation.github_url)"><i class="fa fa-fw fa-eye"></i></button>
+                                    <button class="btn btn-secondary" type="button" @click.prevent="openURL(generateGithubUrl(moduleInformation))"><i class="fa fa-fw fa-eye"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -139,7 +139,8 @@
                 }
                 this.errors = {};
                 this.moduleInformation = {
-                    github_url: repository.html_url,
+                    github_user: repository.owner.login,
+                    github_name: repository.name,
                     name: repository.name.replace(/^[m]{2,3}[_\- ]/i, ""),
                     description: repository.description,
                     link: repository.html_url,
@@ -169,6 +170,9 @@
             },
             openURL(url) {
                 window.open(url);
+            },
+            generateGithubUrl(moduleInformation) {
+                return 'https://github.com/' + moduleInformation.github_user + '/' + moduleInformation.github_name;
             }
         },
         mounted() {

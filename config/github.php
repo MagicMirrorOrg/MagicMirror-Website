@@ -48,7 +48,7 @@ return [
             // 'version' => 'v3',
         ],
 
-        'alternative' => [
+        'application' => [
             'clientId'     => env('GITHUB_APP_ID'),
             'clientSecret' => env('GITHUB_APP_SECRET'),
             'method'       => 'application',

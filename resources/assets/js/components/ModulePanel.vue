@@ -16,37 +16,6 @@
             </small>
         </div>
     </div>
-
-    <!--
-    <div class="panel panel-default module-panel">
-        <div class="panel-heading">
-            <a href="#">
-                <h3 class="panel-title">{{module.name}}</h3>
-            </a>
-        </div>
-
-
-        <a href="#" v-if="module.image">
-            <img :src="'/image/' + module.image + '/400x400'" class="img-responsive">
-        </a>
-
-        <a class="no-image-available" href="#" v-if="!module.image"><span>No image available.</span></a>
-
-  
-            <div class="panel-body">
-                {{module.description}}
-            </div>
-
-
-        <div class="panel-footer">
-            <div class="pull-right">
-                <i class="fa fa-heart"></i> 0 &nbsp;
-                <i class="fa fa-eye"></i> {{module.views}}
-            </div>
-            &nbsp;
-        </div>
-    </div>
-    -->
 </template>
 
 <script>

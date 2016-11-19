@@ -61,9 +61,10 @@ class AuthController extends Controller
     private function findOrCreateUser($githubUser)
     {
         if ($authUser = User::where('github_id', $githubUser->id)->first()) {
-
+            
             $authUser->name = $githubUser->name;
             $authUser->email = $githubUser->email;
+            $authUser->github_user = $githubUser->nickname;
             $authUser->github_token = $githubUser->token;
             $authUser->avatar = $githubUser->avatar;
             $authUser->save();
@@ -75,6 +76,7 @@ class AuthController extends Controller
             'name' => $githubUser->name,
             'email' => $githubUser->email,
             'github_id' => $githubUser->id,
+            'github_user' => $githubUser->nickname,
             'github_token' => $githubUser->token,
             'api_token' => str_random(60),
             'avatar' => $githubUser->avatar

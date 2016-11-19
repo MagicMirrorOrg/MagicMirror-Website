@@ -41,3 +41,8 @@ Route::get('/', function() {
 
     return view('welcome');
 });
+
+
+Route::get('test', function() {
+    dd(GitHub::connection('application')->repo()->show('MichMich', 'MagicMirror'));
+});

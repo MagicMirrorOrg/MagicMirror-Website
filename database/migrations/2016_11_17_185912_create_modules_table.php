@@ -16,7 +16,8 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->string('github_url')->unique();
+            $table->string('github_user');
+            $table->string('github_name');
             
             $table->string('name');
             $table->text('description')->nullable();
@@ -24,8 +25,6 @@ class CreateModulesTable extends Migration
             $table->string('link')->nullable();
 
             $table->integer('views')->default(0);
-
-            $table->integer('user_id')->unsigned();
 
             $table->timestamps();
             $table->softDeletes();

@@ -15,7 +15,7 @@ class Module extends Model
      * @var array
      */
     protected $fillable = [
-        'github_id', 'github_url', 'name', 'description', 'image', 'link', 'views', 'user_id'
+        'github_user', 'github_name', 'name', 'description', 'image', 'link', 'views'
     ];
 
     protected $appends = ['slug','url'];
