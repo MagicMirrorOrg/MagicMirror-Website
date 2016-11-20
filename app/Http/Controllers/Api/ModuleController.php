@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use MagicMirror\Http\Controllers\Api\ApiController;
 use Auth;
 use MagicMirror\Module;
+use GrahamCampbell\GitHub\Facades\GitHub;
+
+use GuzzleHttp\Client;
 
 class ModuleController extends ApiController
 {
@@ -57,9 +60,9 @@ class ModuleController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Module $module)
     {
-        //
+        return $module;
     }
 
     /**
@@ -95,4 +98,37 @@ class ModuleController extends ApiController
     {
         //
     }
+
+
+    /**
+     * Return the repository data.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function repository(Module $module)
+    {
+        return $module->repository;
+    }
+
+    /**
+     * Return the readme of the module.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function readme(Module $module)
+    {
+        $url = $module->readmeUrl;
+
+        if ($url) {
+            return \Cache::remember('Readme-'.$module->id, 5, function () use ($url) {
+                return file_get_contents($url);
+            });
+        }
+
+        abort(404);
+    }
 }
+
+

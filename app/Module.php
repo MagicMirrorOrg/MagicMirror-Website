@@ -4,6 +4,7 @@ namespace MagicMirror;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use GrahamCampbell\GitHub\Facades\GitHub;
 
 class Module extends Model
 {
@@ -36,6 +37,16 @@ class Module extends Model
         return url('module/' . $this->id . '/' . $this->slug);
     }
 
+    public function getRepositoryAttribute() {
+        return GitHub::connection('application')->repo()->show($this->github_user, $this->github_name);
+    }
 
+    public function getReadmeUrlAttribute() {
+        $readmeData = GitHub::connection('application')->repo()->contents()->readme($this->github_user, $this->github_name);
+        if ($readmeData) {
+            return $readmeData['download_url'];
+        }
+        return false; 
+    }
 
 }

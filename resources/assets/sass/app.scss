@@ -182,63 +182,17 @@ form {
 }
 
 
-/*
 
 
-
-
-.list-group {
-    .header {
-        background-color: #eee;
+.readme {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    .readme-content {
+        background-color: #f9f9f9;
         padding: 20px;
-        h3 {
-            color: #000;
-            margin: 0px;
-        }
-        p {
-            margin: 0px;
-            font-size: 16px;
-            color: #999;
-        }
-    }
-    .list-group-item {
-        padding: 20px;
-        form {
-            margin-top: 20px;
-        }
-    }
-    .list-group-item.disabled, .list-group-item.disabled:hover {
-        background-color:#fafafa;
-        h4 {
-            color: #ccc;
-        }
-        p {
-            color: #ddd;
+        .deep-link-icon {
+            display:none;
         }
     }
 }
-
-form {
-    .alert {
-        margin-bottom: 10px;
-        padding: 5px 10px;
-    }
-}
-
-.panel {
-    img {
-        width:100%;
-    }
-    .panel-heading {
-        a {
-            text-decoration: none;
-            color: #000;
-        }
-    }
-    
-}
-
-.module-panel {
-
-}
-*/

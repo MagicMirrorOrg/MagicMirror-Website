@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/me', "Api\MeController@me")->middleware('auth:api');
-Route::get('/me/repositories', "Api\MeController@repositories")->middleware('auth:api');
-Route::resource('module', "Api\ModuleController");
+Route::get("/me", "Api\MeController@me")->middleware("auth:api");
+Route::get("/me/repositories", "Api\MeController@repositories")->middleware("auth:api");
+
+Route::resource("module", "Api\ModuleController");
+Route::get("module/{module}/repository", "Api\ModuleController@repository");
+Route::get("module/{module}/readme", "Api\ModuleController@readme");
