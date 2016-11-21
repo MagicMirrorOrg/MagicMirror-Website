@@ -7361,7 +7361,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
   .navbar .avatar {
     height: 30px;
     float: left;
-    margin-top: 3px;
+    margin-top: 1px;
     margin-right: 10px; }
 
 .wizard-steps .wizard-step {

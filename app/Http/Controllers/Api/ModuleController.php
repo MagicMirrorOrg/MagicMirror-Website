@@ -122,9 +122,9 @@ class ModuleController extends ApiController
         $url = $module->readmeUrl;
 
         if ($url) {
-            return \Cache::remember('Readme-'.$module->id, 5, function () use ($url) {
+            //return \Cache::remember('Readme-'.$module->id, 5, function () use ($url) {
                 return file_get_contents($url);
-            });
+            //});
         }
 
         abort(404);

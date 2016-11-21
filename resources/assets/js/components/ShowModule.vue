@@ -2,7 +2,7 @@
     <div class="show-module" v-if="module">
         <div class="jumbotron">
             <div class="container">
-                <div class="col-md-4">
+                <div class="col-md-6 col-xs-12">
                     <h1>{{module.name}}</h1>
                     <p class="lead">{{module.description}}</p>
                 </div>
