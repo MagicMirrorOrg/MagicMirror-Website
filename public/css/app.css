@@ -2788,7 +2788,7 @@ tbody.collapse.in {
 
 .navbar {
   position: relative;
-  padding: 0.5rem 1rem; }
+  padding: 15px 1rem; }
   .navbar::after {
     content: "";
     display: table;
@@ -7352,7 +7352,12 @@ h1, h2, h3, h4, h5, .navbar-brand {
   font-size: 1rem; }
 
 .navbar {
-  font-family: 'Roboto Condensed', sans-serif; }
+  font-family: 'Roboto Condensed', sans-serif;
+  border-bottom: 1px solid #dfdfdf; }
+  .navbar .navbar-brand {
+    margin-top: -3px; }
+    .navbar .navbar-brand span {
+      color: #999; }
   .navbar .avatar {
     height: 30px;
     float: left;
@@ -7429,5 +7434,99 @@ form {
     padding: 20px; }
     .readme .readme-content .deep-link-icon {
       display: none; }
+
+.home-page .jumbotron {
+  background-image: url("/img/mirror.png");
+  background-position: 600px -100px;
+  background-repeat: no-repeat;
+  position: relative; }
+
+.home-page .magpi-watermark {
+  position: absolute;
+  z-index: 9999;
+  top: 10px;
+  right: 50%;
+  width: 125px;
+  -webkit-animation-name: appear;
+  animation-name: appear;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+  -webkit-transform: scale(0, 0);
+  transform: scale(0, 0);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  -webkit-filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.1)); }
+
+@-webkit-keyframes appear {
+  from {
+    -webkit-transform: scale(0, 0) rotate(30deg) translateX(50%);
+    transform: scale(0, 0) rotate(30deg) translateX(50%); }
+  to {
+    -webkit-transform: scale(1, 1) rotate(-1deg) translateX(50%);
+    transform: scale(1, 1) rotate(-1deg) translateX(50%); } }
+
+@keyframes appear {
+  from {
+    -webkit-transform: scale(0, 0) rotate(30deg) translateX(50%);
+    transform: scale(0, 0) rotate(30deg) translateX(50%); }
+  to {
+    -webkit-transform: scale(1, 1) rotate(-1deg) translateX(50%);
+    transform: scale(1, 1) rotate(-1deg) translateX(50%); } }
+
+.home-page .section {
+  margin-top: 100px; }
+
+.home-page h1.logo {
+  font-size: 100px;
+  font-weight: 100; }
+
+.home-page h1.logo .two {
+  color: #999; }
+
+.home-page p {
+  color: #666; }
+
+.home-page .payoff {
+  color: #666; }
+
+.home-page .links {
+  margin-bottom: -50px; }
+
+.home-page .links .btn {
+  margin-bottom: 50px; }
+
+.home-page .btn-primary {
+  color: #2B879E;
+  border-color: #2B879E;
+  background-color: white; }
+
+.home-page .btn-primary:hover {
+  border-color: #2B879E;
+  background-color: #2B879E; }
+
+.home-page .line {
+  border-bottom: 3px solid #2B879E;
+  width: 75px;
+  display: inline-block; }
+
+.home-page .embed-responsive {
+  border: 1px solid #999; }
+
+.home-page .footer-image {
+  -webkit-transform: translateY(20px);
+  transform: translateY(20px); }
+
+.home-page .footer {
+  border-top: 1px solid #ddd;
+  color: #999; }
+
+.home-page .footer .container {
+  margin-top: 15px;
+  margin-bottom: 15px; }
 
 /*# sourceMappingURL=app.css.map */

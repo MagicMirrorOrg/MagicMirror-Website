@@ -88,6 +88,13 @@ h1, h2, h3, h4, h5, .navbar-brand {
 
 .navbar {
     font-family: 'Roboto Condensed', sans-serif;
+    border-bottom: 1px solid #dfdfdf;
+    .navbar-brand {
+        margin-top: -3px;
+        span {
+            color: #999;
+        }
+    }
     .avatar {
         height: 30px;
         float: left;
@@ -194,5 +201,104 @@ form {
         .deep-link-icon {
             display:none;
         }
+    }
+}
+
+
+.home-page {
+    .jumbotron {
+            background-image: url('/img/mirror.png');
+            background-position: 600px -100px;
+            background-repeat: no-repeat;
+            position: relative;
+    }
+
+    .magpi-watermark {
+        position: absolute;
+        z-index: 9999;
+        top: 10px;
+        right: 50%;
+        width: 125px;
+        animation-name: appear;
+        animation-duration: 2s;
+        animation-delay: 1s;
+        transform: scale(0,0);
+        animation-fill-mode: forwards;
+        transform-origin: 100% 50%;
+
+        -webkit-filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+        filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+    }
+
+    @keyframes appear {
+        from {
+            transform: scale(0,0) rotate(30deg) translateX(50%);
+        }
+        to {
+            transform: scale(1,1) rotate(-1deg) translateX(50%);
+        }
+    }
+
+    .section {
+        margin-top: 100px;
+    }
+
+    h1.logo {
+        font-size: 100px;
+        font-weight: 100;
+    }
+
+    h1.logo .two {
+        color: #999;
+    }
+
+    p {
+        color: #666;
+    }
+
+    .payoff {
+        color: #666;
+    }
+
+    .links {
+        margin-bottom: -50px;
+    }
+
+    .links .btn {
+        margin-bottom: 50px;
+    }
+
+    .btn-primary {
+        color: #2B879E;
+        border-color: #2B879E;
+        background-color: white;
+    }
+    .btn-primary:hover {
+        border-color: #2B879E;
+        background-color: #2B879E;
+    }
+
+    .line {
+        border-bottom: 3px solid #2B879E;
+        width: 75px;
+        display: inline-block;
+
+    }
+
+    .embed-responsive  {
+        border: 1px solid #999;
+    }
+
+    .footer-image {
+        transform: translateY(20px);
+    }
+
+    .footer {
+        border-top: 1px solid #ddd;
+        color: #999;
+    }
+    .footer .container {
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
 }

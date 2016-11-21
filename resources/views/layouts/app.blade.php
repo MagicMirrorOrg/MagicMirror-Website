@@ -25,11 +25,11 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-dark bg-inverse navbar-full ">
+        <nav class="navbar navbar-light navbar-full ">
             <div class="container">
-                <a class="navbar-brand" href="#">MagicMirror²</a>
+                <a class="navbar-brand" href="/">MagicMirror<span>²</span></a>
                 <ul class="nav navbar-nav">
-                    <li class="nav-item"><a href="{{ url('/modules') }}" class="nav-link"><i class="fa fa-fw fa-plug" aria-hidden="true"></i> Modules</a></li>
+                    <li class="nav-item"><a href="{{ url('/modules') }}" class="nav-link"><i class="fa fa-fw fa-cubes" aria-hidden="true"></i> Modules</a></li>
                 </ul>
                 <ul class="nav navbar-nav float-lg-right">
                     @if (Auth::guest())
