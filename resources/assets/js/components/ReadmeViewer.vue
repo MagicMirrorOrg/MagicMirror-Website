@@ -24,8 +24,18 @@
         },
         computed: {
             compiledReadme() {
+                var pkg = {
+                    name: this.module.github_name,
+                    description: this.module.description,
+                    repository: {
+                        type: "git",
+                        url: this.module.github_url
+                    }
+                }
+
                 return marky(this.readme, {
                     highlightSyntax: false,
+                    package: pkg
                 });
             }
         },
@@ -58,46 +68,50 @@
 </script>
 
 <style lang="sass">
-
-.readme {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    .readme-loading, .readme-error {
-        text-align: center;
-        padding: 50px;
-        background-color: #f9f9f9;
-        color: #999;
-    }
-    .readme-content {
-        color: #666;
-        background-color: #f9f9f9;
-        padding: 20px;
-        a {
-            color: #333;
-            text-decoration: underline;
+    .readme {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        .readme-loading,
+        .readme-error {
+            text-align: center;
+            padding: 50px;
+            background-color: #f9f9f9;
+            color: #999;
         }
-        a:hover {
-            color: #000;
-        }
-        .deep-link-icon {
-            display:none;
-        }
-        pre {
-            code {
-                display: block;
-                background-color: #eee;
-                padding: 10px;
+        .readme-content {
+            color: #666;
+            background-color: #f9f9f9;
+            padding: 20px;
+            a {
+                color: #000;
+                
+            }
+            a:hover {
+                color: #000;
+                text-decoration: underline;
+            }
+            .deep-link-icon {
+                display: none;
+            }
+            img {
+                max-width: 100%;
+            }
+            pre {
+                code {
+                    display: block;
+                    background-color: #eee;
+                    padding: 10px;
+                }
+            }
+            table {
+                border: 1px solid #ddd;
+                margin: 10px 0;
+                th,
+                td {
+                    padding: 5px;
+                }
             }
         }
-        table {
-            border: 1px solid #ddd;
-            margin: 10px 0;
-            th, td {
-                padding: 5px;
-            }
-        }
     }
-}
-
 </style>
