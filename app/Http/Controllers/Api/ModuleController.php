@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use MagicMirror\Http\Controllers\Api\ApiController;
 use Auth;
 use MagicMirror\Module;
+use MagicMirror\Tag;
 use GrahamCampbell\GitHub\Facades\GitHub;
-
-use GuzzleHttp\Client;
 
 class ModuleController extends ApiController
 {
@@ -49,7 +48,12 @@ class ModuleController extends ApiController
             'category_id' => 'required',
         ]);
 
-        return Module::create($request->all());
+        $module = Module::create($request->all());
+        $tagIDs = Tag::getOrCreate($request->get('tags', []))->pluck('id')->toArray();
+
+        $module->tags()->sync($tagIDs);
+
+        return $module;
     }
 
     /**

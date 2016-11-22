@@ -3,6 +3,7 @@
 
 use GrahamCampbell\GitHub\Facades\GitHub;
 use MagicMirror\Module;
+use MagicMirror\Tag;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +45,7 @@ Route::get('/', function() {
 
 
 Route::get('test', function() {
-    dd(GitHub::connection('application')->repo()->show('MichMich', 'MagicMirror'));
+    
+    return Tag::getOrCreate(['whoot', 'foo', 'bar','whutt','works']);
+
 });

@@ -19,7 +19,7 @@ class Module extends Model
         'github_user', 'github_name', 'name', 'description', 'image', 'link', 'views', 'category_id'
     ];
 
-    protected $appends = ['slug','url', 'github_url'];
+    protected $appends = ['slug', 'url', 'github_url', 'tags'];
 
     protected $hidden = ['deleted_at', 'category_id'];
 
@@ -33,12 +33,20 @@ class Module extends Model
         return $this->belongsTo('MagicMirror\category');
     }
 
+    public function tags() {
+        return $this->belongsToMany('MagicMirror\Tag');
+    } 
+
     public function getSlugAttribute() {
         return str_slug($this->name);
     }
 
     public function getUrlAttribute() {
         return url('module/' . $this->id . '/' . $this->slug);
+    }
+
+    public function getTagsAttribute() {
+        return $this->tags()->pluck('name')->toArray();
     }
 
     public function getGithubUrlAttribute() {

@@ -1,5 +1,7 @@
 <template>
     <div class="container add-module">
+
+        <!--<multiselect v-model="selected" :options="options"></multiselect>-->
         
         <ul class="text-xs-center img-thumbnail wizard-steps">
             <div class="row">
@@ -24,7 +26,7 @@
                 <p>Please select the repository of the MagicMirror² Module you want to add.</p>
             </div>
 
-            <div class="list-group-item text-center" v-if="loading">
+            <div class="list-group-item text-sm-center" v-if="loading">
                 <i class="fa fa-spinner fa-pulse fa-fw"></i> Loading repositories &hellip;
             </div>
 
@@ -104,6 +106,19 @@
 
                     <hr>
 
+                    <div class="form-group row" :class="{'has-danger': errors.image}">
+                        <label for="moduleLink" class="col-md-2 col-form-label">Tags</label>
+                        <div class="col-md-5">
+                            <!--<multiselect
+                            v-model="selected"
+                            :options="options">
+                            </multiselect>-->
+                            <input type="text" class="form-control" v-model="tags">
+                        </div>
+                    </div>
+
+                    <hr>
+
                     <div class="form-group row">
                         <div class="offset-md-2 col-md-10">
                             <button type="submit" class="btn btn-primary btn-lg" :disabled="moduleInformation.name.length <= 0">
@@ -112,6 +127,7 @@
                         </div>
                     </div>
                 </form>
+                <pre>{{moduleInformation}}</pre>
             </div>
         </div>
     </div>
@@ -126,8 +142,14 @@
                 saving: false,
                 categories: [],
                 repositories: [],
+                tagSuggestions: [],
                 moduleInformation: false,
-                errors: {}
+                errors: {},
+
+                tags: "",
+
+                selected: null,
+                options: ['list', 'of', 'options']
             }
         },
         methods: {
@@ -198,6 +220,11 @@
         mounted() {
             this.fetchCategories();
             this.fetchRepositories();
+        },
+        watch: {
+            tags: function(newTags) {
+                this.moduleInformation.tags = newTags.split(',');
+            }
         }
     }
 </script>

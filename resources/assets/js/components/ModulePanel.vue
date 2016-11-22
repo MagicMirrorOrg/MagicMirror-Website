@@ -9,6 +9,9 @@
         <div class="card-block">
             <p class="card-text category-name">{{module.category.name}}</p>
             <p class="card-text">{{module.description}}</p>
+            <p class="card-text tags">
+                <a href="#" class="tag tag-default" v-for="tag in module.tags">{{tag}}</a>    
+            </p>
         </div>
         <div class="card-footer text-muted text-xs-right">
             <small class="text-muted">
@@ -67,6 +70,21 @@
         font-size: 0.8rem;
         font-weight: bold;
         margin-bottom: 5px;
+    }
+    .tag {
+        margin-right: 2px;
+        margin-bottom: 2px;
+        padding: 3px;
+        border-radius: 2px;
+        color: #aaa;
+        background-color: #eee;
+        text-transform: uppercase;
+        font-size: 0.65rem;
+
+    }
+    .tag:hover {
+        color: white;
+        background-color: #666;
     }
 }
 </style>
