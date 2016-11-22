@@ -56,6 +56,15 @@
                         </div>
                     </div>
 
+                    <div class="form-group row" :class="{'has-danger': errors.github_url}">
+                        <label for="moduleURL" class="col-md-2 col-form-label">Category</label>
+                        <div class="col-md-10">
+                            <select class="custom-select"  v-model="moduleInformation.category_id">
+                                <option v-for="category in categories" v-bind:value="category.id">{{category.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <hr>
 
                     <div class="form-group row" :class="{'has-danger': errors.name}">
@@ -115,12 +124,22 @@
                 step: 1,
                 loading: false,
                 saving: false,
+                categories: [],
                 repositories: [],
                 moduleInformation: false,
                 errors: {}
             }
         },
         methods: {
+            fetchCategories() {
+                var _this = this;
+                this.$http.get('/api/category').then((response) => {
+                    _this.categories = response.data;
+                }, (response) => {
+                    console.error("Could not load categories.");
+                    console.error(response);
+                })
+            },
             fetchRepositories() {
                 var _this = this;
                 _this.loading = true;
@@ -144,7 +163,8 @@
                     name: repository.name.replace(/^[m]{2,3}[_\- ]/i, ""),
                     description: repository.description,
                     link: repository.html_url,
-                    image: ''
+                    image: '',
+                    category_id: 1
                 }
 
                 this.step = 2;
@@ -176,6 +196,7 @@
             }
         },
         mounted() {
+            this.fetchCategories();
             this.fetchRepositories();
         }
     }

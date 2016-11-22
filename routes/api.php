@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get("/me", "Api\MeController@me")->middleware("auth:api");
-Route::get("/me/repositories", "Api\MeController@repositories")->middleware("auth:api");
+Route::get("me", "Api\MeController@me")->middleware("auth:api");
+Route::get("me/repositories", "Api\MeController@repositories")->middleware("auth:api");
+
+Route::resource("category", "Api\CategoryController");
 
 Route::resource("module", "Api\ModuleController");
 Route::get("module/{module}/repository", "Api\ModuleController@repository");

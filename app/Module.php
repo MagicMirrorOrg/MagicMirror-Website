@@ -16,17 +16,21 @@ class Module extends Model
      * @var array
      */
     protected $fillable = [
-        'github_user', 'github_name', 'name', 'description', 'image', 'link', 'views'
+        'github_user', 'github_name', 'name', 'description', 'image', 'link', 'views', 'category_id'
     ];
 
-    protected $appends = ['slug','url'];
+    protected $appends = ['slug','url', 'github_url'];
 
-    protected $hidden = ['deleted_at','user_id'];
+    protected $hidden = ['deleted_at', 'category_id'];
 
-    protected $with = ['user'];
+    protected $with = ['category'];
 
     public function user() {
-        return $this->belongsTo('MagicMirror\User');
+        return $this->belongsTo('MagicMirror\User', 'github_user', 'github_user');
+    }
+
+    public function category() {
+        return $this->belongsTo('MagicMirror\category');
     }
 
     public function getSlugAttribute() {
@@ -35,6 +39,10 @@ class Module extends Model
 
     public function getUrlAttribute() {
         return url('module/' . $this->id . '/' . $this->slug);
+    }
+
+    public function getGithubUrlAttribute() {
+        return url('https://github.com/' . $this->github_user . '/' . $this->github_name);
     }
 
     public function getRepositoryAttribute() {

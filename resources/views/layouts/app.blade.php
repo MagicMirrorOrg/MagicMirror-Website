@@ -33,7 +33,7 @@
                 </ul>
                 <ul class="nav navbar-nav float-lg-right">
                     @if (Auth::guest())
-                        <li class="nav-item"><a href="{{ url('/auth/github') }}" class="nav-link"><i class="fa fa-github" aria-hidden="true"></i> Login with GitHub</a></li>
+                        <li class="nav-item"><a href="{{ url('/auth/github') }}" class="btn btn-outline-primary"><i class="fa fa-github" aria-hidden="true"></i> Login with GitHub</a></li>
                     @else
                         <img src="{{ Auth::user()->avatar }} " alt="Avatar" class="rounded-circle avatar">
                         <li class="nav-item dropdown">

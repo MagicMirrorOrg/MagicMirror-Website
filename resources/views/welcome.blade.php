@@ -49,7 +49,7 @@
                 <div class="col-md-8 offset-md-2 text-sm-center">
                     <h2>Watch the video:</h2>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe src="https://player.vimeo.com/video/171152845" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/171152845" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                     </div>
                 </div>
             </div>

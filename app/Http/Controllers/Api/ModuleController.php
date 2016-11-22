@@ -45,13 +45,11 @@ class ModuleController extends ApiController
             'github_name' => 'required',
             'name' => 'required|unique:modules|max:50',
             'description' => 'required|max:256',
-            'link' => 'url'
+            'link' => 'url',
+            'category_id' => 'required',
         ]);
 
-        $data = $request->all();
-        $data['user_id'] = Auth::user()->id;
-
-        return Module::create($data);
+        return Module::create($request->all());
     }
 
     /**

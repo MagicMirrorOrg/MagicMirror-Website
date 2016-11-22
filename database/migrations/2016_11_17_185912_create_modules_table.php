@@ -23,6 +23,7 @@ class CreateModulesTable extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('link')->nullable();
+            $table->integer('category_id');
 
             $table->integer('views')->default(0);
 

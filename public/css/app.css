@@ -7321,36 +7321,6 @@ h1, h2, h3, h4, h5, .navbar-brand {
     -moz-column-count: 4;
     column-count: 4; } }
 
-.card .card-header h5 {
-  margin: 0;
-  font-size: 1.2rem;
-  text-decoration: none; }
-
-.card .card-header a, .card .card-header a:hover {
-  color: black;
-  text-decoration: none; }
-
-.card img {
-  width: 100%; }
-
-.card .no-image-available {
-  display: block;
-  position: relative;
-  background-color: #eee;
-  font-size: 12px;
-  color: #ccc;
-  height: 0;
-  padding-bottom: 50%; }
-  .card .no-image-available span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%); }
-
-.card .card-text {
-  font-size: 1rem; }
-
 .navbar {
   font-family: 'Roboto Condensed', sans-serif;
   border-bottom: 1px solid #dfdfdf; }
@@ -7424,16 +7394,6 @@ form {
   form .alert {
     margin-bottom: 10px;
     padding: 5px 10px; }
-
-.readme {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden; }
-  .readme .readme-content {
-    background-color: #f9f9f9;
-    padding: 20px; }
-    .readme .readme-content .deep-link-icon {
-      display: none; }
 
 .home-page .jumbotron {
   background-image: url("/img/mirror.png");
