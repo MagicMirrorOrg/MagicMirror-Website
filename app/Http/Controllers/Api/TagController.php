@@ -13,9 +13,12 @@ class TagController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return Tag::all();
+    public function index($search = false)
+    {   
+        if ($search != false) {
+           return Tag::where('name','like', '%'.$search.'%')->get()->pluck('name'); 
+        }
+        return Tag::all()->pluck('name');
     }
 
     /**

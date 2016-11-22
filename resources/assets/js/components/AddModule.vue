@@ -1,8 +1,6 @@
 <template>
     <div class="container add-module">
-
-        <!--<multiselect v-model="selected" :options="options"></multiselect>-->
-        
+    
         <ul class="text-xs-center img-thumbnail wizard-steps">
             <div class="row">
                 <div class="col-md-6 wizard-step" >
@@ -106,14 +104,20 @@
 
                     <hr>
 
-                    <div class="form-group row" :class="{'has-danger': errors.image}">
+                    <div class="form-group row" :class="{'has-danger': errors.tags}">
                         <label for="moduleLink" class="col-md-2 col-form-label">Tags</label>
                         <div class="col-md-5">
-                            <!--<multiselect
-                            v-model="selected"
-                            :options="options">
-                            </multiselect>-->
-                            <input type="text" class="form-control" v-model="tags">
+                            <multiselect    v-model="moduleInformation.tags" 
+                                            :options="tagSuggestions" 
+                                            :multiple="true" 
+                                            :taggable="true" 
+                                            :hideSelected="true"
+                                            :closeOnSelect="false"
+                                            :max="10"
+                                            tag-placeholder="Add this as new tag." 
+                                            placeholder="Add tags."
+                                            @search-change="searchTags">
+                            </multiselect>
                         </div>
                     </div>
 
@@ -145,11 +149,6 @@
                 tagSuggestions: [],
                 moduleInformation: false,
                 errors: {},
-
-                tags: "",
-
-                selected: null,
-                options: ['list', 'of', 'options']
             }
         },
         methods: {
@@ -215,16 +214,23 @@
             },
             generateGithubUrl(moduleInformation) {
                 return 'https://github.com/' + moduleInformation.github_user + '/' + moduleInformation.github_name;
+            },
+            searchTags(query) {
+                console.log(query);
+                if (query == "") {
+                    this.tagSuggestions = [];
+                    return;
+                }
+                var _this = this;
+                _this.$http.get('/api/tag/' + query).then((response) => {
+                    _this.tagSuggestions = response.data;
+                    _this.tagSuggestions.splice(0, 0, query);
+                });
             }
         },
         mounted() {
             this.fetchCategories();
             this.fetchRepositories();
-        },
-        watch: {
-            tags: function(newTags) {
-                this.moduleInformation.tags = newTags.split(',');
-            }
         }
     }
 </script>

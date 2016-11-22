@@ -18,6 +18,7 @@ Route::get("me/repositories", "Api\MeController@repositories")->middleware("auth
 
 Route::resource("category", "Api\CategoryController");
 Route::resource("tag", "Api\TagController");
+Route::get("tag/{tag}", "Api\TagController@index");
 
 Route::resource("module", "Api\ModuleController");
 Route::get("module/{module}/repository", "Api\ModuleController@repository");
