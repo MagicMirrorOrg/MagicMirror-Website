@@ -91,5 +91,9 @@ class User extends Authenticatable
     }
 
 
+
+    public function likes() {
+        return $this->belongsToMany('MagicMirror\Module', 'likes');
+    }
     
 }

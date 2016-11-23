@@ -27,6 +27,28 @@
 </template>
 <script>
     export default {
-        props: ['module']
+        props: ['moduleId'],
+        data() {
+            return {
+                module: false,
+                loading: false,
+            }
+        },
+        methods: {
+            fetchModule() {
+                var _this = this;
+                this.$http.get("/api/module/" + this.moduleId).then((response) => {
+                    _this.loading = false;
+                    _this.module = response.data;
+                    console.log(response);
+                }, (response) => {
+                    _this.loading = false;
+                    console.error(response);
+                })
+            }
+        },
+        mounted() {
+            this.fetchModule();
+        }
     }
 </script>

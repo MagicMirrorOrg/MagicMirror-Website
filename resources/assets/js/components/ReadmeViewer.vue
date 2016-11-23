@@ -7,7 +7,7 @@
             <div v-if="error" class="readme-error" @click="fetchReadme()">
                 <i class="fa fa-frown-o"></i> Whoops! I couldn't find the readme for this module &hellip;
             </div>
-            <div v-if="readme" v-html="compiledReadme" class="readme-content"></div>
+            <div v-if="readme" class="readme-content"><div v-html="compiledReadme"></div></div>
         </div>
     </div>
 </template>
@@ -35,13 +35,14 @@
 
                 return marky(this.readme, {
                     highlightSyntax: false,
-                    package: pkg
+                    package: pkg,
+                    debug: false
                 });
+
             }
         },
         methods: {
             fetchReadme() {
-                console.log("Fetch Readme");
                 var _this = this;
 
                 var url = "/api/module/" + _this.module.id + "/readme";
@@ -60,7 +61,6 @@
             }
         },
         mounted() {
-            console.log("Mounted");
             this.fetchReadme();
         }
     

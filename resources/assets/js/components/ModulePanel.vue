@@ -1,6 +1,6 @@
 <template>
 
-    <div class="card">
+    <div class="card" v-if="module">
         <div class="card-header">
             <a :href="module.url"><h5 class="card-title">{{module.name}}</h5></a>
         </div>
@@ -13,18 +13,40 @@
                 <a href="#" class="tag tag-default" v-for="tag in module.tags">{{tag}}</a>    
             </p>
         </div>
-        <div class="card-footer text-muted text-xs-right">
+        <div class="card-footer text-muted">
+            <button class="btn btn-sm btn-secondary pull-right" @click.prevent="toggleLike()">
+                <i class="fa fa-heart" :class="{'text-danger': module.liked}"></i> {{module.likes}}
+            </button>
             <small class="text-muted">
-                <i class="fa fa-heart"></i> 0 &nbsp;
                 <i class="fa fa-eye"></i> {{module.views}}      
             </small>
         </div>
+        
+
     </div>
 </template>
 
 <script>
     export default {
-        props: ['module']
+        props: ['module'],
+        methods: {
+            toggleLike() {
+                console.log('Toggle like');
+                this.$set(this.module, 'liked', !this.module.liked);
+                if (this.module.liked) {
+                     this.$set(this.module, 'likes', this.module.likes + 1);
+                } else {
+                    this.$set(this.module, 'likes', this.module.likes - 1);
+                }
+
+                this.$http.post("/api/module/" + this.module.id + '/liked', {likes: this.module.liked}).then((response) => {
+                    console.log(response);
+                }, (response) => {
+                    console.error(response);
+                })
+
+            }
+        }
     }
 </script>
 

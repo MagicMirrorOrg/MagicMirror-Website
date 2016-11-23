@@ -23,3 +23,4 @@ Route::get("tag/{tag}", "Api\TagController@index");
 Route::resource("module", "Api\ModuleController");
 Route::get("module/{module}/repository", "Api\ModuleController@repository");
 Route::get("module/{module}/readme", "Api\ModuleController@readme");
+Route::post("module/{module}/liked", "Api\ModuleController@liked")->middleware('auth:api');;

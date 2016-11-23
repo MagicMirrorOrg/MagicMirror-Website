@@ -5,6 +5,7 @@ namespace MagicMirror;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use GrahamCampbell\GitHub\Facades\GitHub;
+use Auth;
 
 class Module extends Model
 {
@@ -19,11 +20,13 @@ class Module extends Model
         'github_user', 'github_name', 'name', 'description', 'image', 'link', 'views', 'category_id'
     ];
 
-    protected $appends = ['slug', 'url', 'github_url', 'tags'];
+    protected $appends = ['slug', 'url', 'github_url', 'tags', 'likes'];
 
     protected $hidden = ['deleted_at', 'category_id'];
 
     protected $with = ['category'];
+
+    private $likedUser = null;
 
     public function user() {
         return $this->belongsTo('MagicMirror\User', 'github_user', 'github_user');
@@ -37,6 +40,10 @@ class Module extends Model
         return $this->belongsToMany('MagicMirror\Tag');
     } 
 
+    public function likes() {
+        return $this->belongsToMany('MagicMirror\User', 'likes');
+    }
+
     public function getSlugAttribute() {
         return str_slug($this->name);
     }
@@ -47,6 +54,18 @@ class Module extends Model
 
     public function getTagsAttribute() {
         return $this->tags()->pluck('name')->toArray();
+    }
+
+    public function getLikesAttribute() {
+        return $this->likes()->count();
+    }
+
+    public function getLikedAttribute() {
+        if ($this->likedUser && $this->likes()->where('id','=',$this->likedUser->id)->first()) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getGithubUrlAttribute() {
@@ -63,6 +82,13 @@ class Module extends Model
             return $readmeData['download_url'];
         }
         return false; 
+    }
+
+    public function addLikedForUser(User $user) {
+        if ($user) {
+            $this->likedUser = $user;
+            $this->appends[] = 'liked';
+        }
     }
 
 }

@@ -18,7 +18,9 @@ class ModuleController extends ApiController
      */
     public function index()
     {
-        return Module::all();
+        return Module::all()->each(function($module) {
+            $module->addLikedForUser(Auth::guard('api')->user());
+        });
     }
 
     /**
@@ -53,6 +55,8 @@ class ModuleController extends ApiController
 
         $module->tags()->sync($tagIDs);
 
+        $module->addLikedForUser(Auth::guard('api')->user());
+
         return $module;
     }
 
@@ -64,6 +68,8 @@ class ModuleController extends ApiController
      */
     public function show(Module $module)
     {
+        $module->addLikedForUser(Auth::guard('api')->user());
+
         return $module;
     }
 
@@ -130,6 +136,23 @@ class ModuleController extends ApiController
         }
 
         abort(404);
+    }
+
+    /**
+     * Set the liked state of a modle by a user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function liked(Request $request, Module $module)
+    {
+        if ($request->get('likes')) {
+            $module->likes()->attach(Auth::user()->id);
+        } else {
+            $module->likes()->detach(Auth::user()->id);
+        }
+
+        return $module;
     }
 }
 

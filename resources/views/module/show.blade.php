@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <show-module :module='{!!$module->toJSON()!!}'></show-module>
+    <show-module :module-id="{{$module->id}}"></show-module>
 
 @endsection
