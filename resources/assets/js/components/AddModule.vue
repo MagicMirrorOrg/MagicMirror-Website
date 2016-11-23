@@ -114,8 +114,9 @@
                                             :hideSelected="true"
                                             :closeOnSelect="false"
                                             :max="10"
-                                            tag-placeholder="Add this as new tag." 
-                                            placeholder="Add tags."
+                                            input-filter="[^a-zA-Z0-9-]"
+                                            tag-placeholder="Add this as new tag" 
+                                            placeholder="Add tags"
                                             @search-change="searchTags">
                             </multiselect>
                         </div>
@@ -216,11 +217,13 @@
                 return 'https://github.com/' + moduleInformation.github_user + '/' + moduleInformation.github_name;
             },
             searchTags(query) {
-                console.log(query);
-                if (query == "") {
+                if (query.length < 2 ) {
                     this.tagSuggestions = [];
                     return;
                 }
+
+                this.tagSuggestion = [query];
+
                 var _this = this;
                 _this.$http.get('/api/tag/' + query).then((response) => {
                     _this.tagSuggestions = response.data;
