@@ -2,10 +2,10 @@
 
     <div class="card" v-if="module">
         <div class="card-header">
-            <a :href="module.url"><h5 class="card-title">{{module.name}}</h5></a>
+            <router-link :to="module.uri"><h5 class="card-title">{{module.name}}</h5></router-link>
         </div>
-        <a :href="module.url"><img class="img-fluid" :src="'/image/' + module.image + '/400x400'" v-if="module.image"></a>
-        <a class="no-image-available" :href="module.url" v-if="!module.image"><span>No image available.</span></a>
+        <router-link :to="module.uri"><img class="img-fluid" :src="'/image/' + module.image + '/400x400'" v-if="module.image"></router-link>
+        <router-link class="no-image-available" :to="module.uri" v-if="!module.image"><span>No image available.</span></router-link>
         <div class="card-block">
             <p class="card-text category-name">{{module.category.name}}</p>
             <p class="card-text">{{module.description}}</p>

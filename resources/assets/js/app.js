@@ -16,13 +16,58 @@ require('./bootstrap');
 //Vue.component('Multiselect', require('vue-multiselect'));
 Vue.component('Multiselect', require('vue-multiselect').default);
 
+Vue.component('navBar', require('./components/NavBar.vue'));
+
+
+Vue.component('homeComponent', require('./components/HomeComponent.vue'));
 Vue.component('moduleList', require('./components/ModuleList.vue'));
-Vue.component('modulePanel', require('./components/ModulePanel.vue'));
-Vue.component('addModule', require('./components/AddModule.vue'));
-Vue.component('imageUploader', require('./components/ImageUploader.vue'));
 Vue.component('showModule', require('./components/ShowModule.vue'));
-Vue.component('readmeViewer', require('./components/ReadmeViewer.vue'));
+Vue.component('addModule', require('./components/AddModule.vue'));
+
+
+Vue.component('modulePanel', require('./components/ModulePanel.vue'));
+
+Vue.component('imageUploader', require('./components/ImageUploader.vue'));
+
+const routes = [
+  { path: '/', component: { template: '<home-component></home-component>' }},
+  { path: '/modules', component: { template: '<module-list></module-list>' }},
+  { path: '/module/add', component: { template: '<add-module></add-module>' }},
+  { path: '/module/:id', component: { template: '<show-module :module-id="$route.params.id" :user="user"></show-module>' }},
+  { path: '/module/:id/:name', component: { template: '<show-module :module-id="$route.params.id" :user="user"></show-module>' }},
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes // short for routes: routes
+})
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
+    data: {
+        user: null
+    },
+    methods: {
+        fetchUser() {
+            var _this = this;
+            _this.$http.get('/api/me').then((response) => {
+                _this.user = response.data;
+            })
+        },
+        logout() {
+            var _this = this;
+            this.$http.post('/logout').then((response) => {
+                _this.user = null;
+                _this.$router.push('/');
+            });
+        }
+    },
+    mounted() {
+        var _this = this;
+        _this.$on('logout', function () {
+            _this.logout();
+        })
+        _this.fetchUser();
+    }
 });

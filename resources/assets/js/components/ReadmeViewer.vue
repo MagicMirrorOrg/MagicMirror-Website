@@ -52,7 +52,6 @@
                 this.$http.get(url).then((response) => {
                     _this.loading = false;
                     _this.readme = response.data;
-                    console.log(response);
                 }, (response) => {
                     _this.loading = false;
                     _this.error = true;

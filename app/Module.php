@@ -20,9 +20,9 @@ class Module extends Model
         'github_user', 'github_name', 'name', 'description', 'image', 'link', 'views', 'category_id'
     ];
 
-    protected $appends = ['slug', 'url', 'github_url', 'tags', 'likes'];
+    protected $appends = ['slug', 'url', 'uri', 'github_url', 'tags', 'likes'];
 
-    protected $hidden = ['deleted_at', 'category_id'];
+    protected $hidden = ['deleted_at'];
 
     protected $with = ['category'];
 
@@ -48,8 +48,12 @@ class Module extends Model
         return str_slug($this->name);
     }
 
+    public function getUriAttribute() {
+        return '/module/' . $this->id . '/' . $this->slug;
+    }
+
     public function getUrlAttribute() {
-        return url('module/' . $this->id . '/' . $this->slug);
+        return url($this->uri);
     }
 
     public function getTagsAttribute() {

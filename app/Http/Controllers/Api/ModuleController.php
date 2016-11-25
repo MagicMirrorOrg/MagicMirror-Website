@@ -19,7 +19,9 @@ class ModuleController extends ApiController
     public function index()
     {
         return Module::all()->each(function($module) {
-            $module->addLikedForUser(Auth::guard('api')->user());
+            if (!Auth::guard('api')->guest()) {
+                $module->addLikedForUser(Auth::guard('api')->user());
+            }
         });
     }
 
@@ -51,8 +53,8 @@ class ModuleController extends ApiController
         ]);
 
         $module = Module::create($request->all());
+        
         $tagIDs = Tag::getOrCreate($request->get('tags', []))->pluck('id')->toArray();
-
         $module->tags()->sync($tagIDs);
 
         $module->addLikedForUser(Auth::guard('api')->user());
@@ -91,9 +93,25 @@ class ModuleController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Module $module)
     {
-        //
+        $this->validate($request, [
+            'github_user' => 'required',
+            'github_name' => 'required',
+            'name' => 'required|unique:modules,name,' .$module->id. '|max:50',
+            'description' => 'required|max:256',
+            'link' => 'url',
+            'category_id' => 'required',
+        ]);
+
+        $module->update($request->all());
+
+        $tagIDs = Tag::getOrCreate($request->get('tags', []))->pluck('id')->toArray();
+        $module->tags()->sync($tagIDs);
+
+        $module->addLikedForUser(Auth::guard('api')->user());
+
+        return $module;
     }
 
     /**
