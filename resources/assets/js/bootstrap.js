@@ -20,6 +20,7 @@ require('bootstrap');
 window.Vue = require('vue');
 require('vue-resource');
 window.VueRouter = require('vue-router');
+window.Vuex = require('vuex');
 
 
 /**

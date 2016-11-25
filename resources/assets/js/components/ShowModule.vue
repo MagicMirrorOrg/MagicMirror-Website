@@ -38,17 +38,19 @@
 </template>
 <script>
 
+    import userStore from './../store/user.js';
+
     export default {
         props: {
             moduleId: {
                 required: true,
                 default: null
-            },
-            user: {
-                default: function() {
-                    return {admin: true};
-                }
-            }   
+            } 
+        },
+        computed: {
+            user() {
+                return userStore.state.user;
+            }
         },
         components: {
             'readmeViewer': require('./ReadmeViewer.vue'),

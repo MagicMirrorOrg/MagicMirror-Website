@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="app">
-        <nav-bar :user="user"></nav-bar>
+        <nav-bar></nav-bar>
 
         <router-view></router-view>
 

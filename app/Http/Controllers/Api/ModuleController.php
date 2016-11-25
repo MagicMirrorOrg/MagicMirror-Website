@@ -43,6 +43,10 @@ class ModuleController extends ApiController
      */
     public function store(Request $request)
     {
+        if (!Auth::guard('api')->user()->admin && $request->get('github_name') !== Auth::guard('api')->user()->github_name) {
+            abort(403);
+        }
+
         $this->validate($request, [
             'github_user' => 'required',
             'github_name' => 'required',
@@ -95,6 +99,10 @@ class ModuleController extends ApiController
      */
     public function update(Request $request, Module $module)
     {
+        if (!Auth::guard('api')->user()->admin && $request->get('github_name') !== Auth::guard('api')->user()->github_name) {
+            abort(403);
+        }
+
         $this->validate($request, [
             'github_user' => 'required',
             'github_name' => 'required',

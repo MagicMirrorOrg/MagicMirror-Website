@@ -98,6 +98,10 @@
 <script>
     export default {
         props: ['module'],
+        components: {
+            imageUploader: require('./ImageUploader.vue'),
+            multiselect: require('vue-multiselect').default
+        },
         data() {
             return {
                 saving: false,
