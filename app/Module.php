@@ -33,7 +33,7 @@ class Module extends Model
     }
 
     public function category() {
-        return $this->belongsTo('MagicMirror\category');
+        return $this->belongsTo('MagicMirror\Category');
     }
 
     public function tags() {

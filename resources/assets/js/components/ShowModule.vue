@@ -29,9 +29,6 @@
                     </div>
                 </div>
                 
-                <hr>
-                <pre>{{user}}</pre>
-                <pre>{{module}}</pre>
             </div>
         </div>
     </div>
