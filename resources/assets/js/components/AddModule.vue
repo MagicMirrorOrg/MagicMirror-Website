@@ -50,97 +50,8 @@
                     <p>Please enter or modify the information about your module down below.</p>
                 </div>
                 <div class="list-group-item">
-                    <form @submit.prevent="saveModule()">
-                        
-                        <div class="form-group row" :class="{'has-danger': errors.github_url}">
-                            <label for="moduleURL" class="col-md-2 col-form-label">Module URL</label>
-                            <div class="col-md-10">
-                                <div class="alert alert-danger" v-if="errors.github_url"><i class="fa fa-exclamation-triangle"></i> {{errors.github_url[0]}}</div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control disabled" id="moduleURL" placeholder="URL" disabled="true" :value="generateGithubUrl(moduleInformation)">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-secondary" type="button" @click.prevent="openURL(generateGithubUrl(moduleInformation))"><i class="fa fa-fw fa-eye"></i></button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row" :class="{'has-danger': errors.github_url}">
-                            <label for="moduleURL" class="col-md-2 col-form-label">Category</label>
-                            <div class="col-md-10">
-                                <select class="custom-select"  v-model="moduleInformation.category_id">
-                                    <option v-for="category in categories" v-bind:value="category.id">{{category.name}}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group row" :class="{'has-danger': errors.name}">
-                            <label for="moduleName" class="col-md-2 col-form-label">Module Name</label>
-                            <div class="col-md-10">
-                                <div class="alert alert-danger" v-if="errors.name"><i class="fa fa-exclamation-triangle"></i> {{errors.name[0]}}</div>
-                                <input type="text" class="form-control" id="moduleName" placeholder="Name"  v-model="moduleInformation.name" maxlength="50">
-                                <div class="help-block">Give your module a nice name. Please leave away the common <code>MMM-</code> part.</div>
-                            </div>
-                        </div>
-                        <div class="form-group row" :class="{'has-danger': errors.description}">
-                            <label for="moduleDescription" class="col-md-2 col-form-label">Description</label>
-                            <div class="col-md-10">
-                                <div class="alert alert-danger" v-if="errors.description"><i class="fa fa-exclamation-triangle"></i> {{errors.description[0]}}</div>
-                                <textarea class="form-control" rows="5" placeholder="Description" v-model="moduleInformation.description" maxlength="256"></textarea>
-                                <div class="help-block">Please describe your module functionalities in 256 characters or less.</div>
-                            </div>
-                        </div>
-                        <div class="form-group row" :class="{'has-danger': errors.link}">
-                            <label for="moduleLink" class="col-md-2 col-form-label">More Info URL</label>
-                            <div class="col-md-10">
-                                <div class="alert alert-danger" v-if="errors.link"><i class="fa fa-exclamation-triangle"></i> {{errors.link[0]}}</div>
-                                <input type="text" class="form-control" id="moduleLink" placeholder="URL" v-model="moduleInformation.link">
-                                <div class="help-block">Where can we find more information? This can be your website, a forum topic or the GitHub page.</div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group row" :class="{'has-danger': errors.image}">
-                            <label for="moduleLink" class="col-md-2 col-form-label">Image</label>
-                            <div class="col-md-5">
-                                <div class="alert alert-danger" v-if="errors.image"><i class="fa fa-exclamation-triangle"></i> {{errors.image[0]}}</div>
-                                <image-uploader v-model="moduleInformation.image" base-path="/file/"></image-uploader>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group row" :class="{'has-danger': errors.tags}">
-                            <label for="moduleLink" class="col-md-2 col-form-label">Tags</label>
-                            <div class="col-md-5">
-                                <multiselect    v-model="moduleInformation.tags" 
-                                                :options="tagSuggestions" 
-                                                :multiple="true" 
-                                                :taggable="true" 
-                                                :hideSelected="true"
-                                                :closeOnSelect="false"
-                                                :max="10"
-                                                input-filter="[^a-zA-Z0-9-]"
-                                                tag-placeholder="Add this as new tag" 
-                                                placeholder="Add tags"
-                                                @search-change="searchTags">
-                                </multiselect>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group row">
-                            <div class="offset-md-2 col-md-10">
-                                <button type="submit" class="btn btn-primary btn-lg" :disabled="moduleInformation.name.length <= 0">
-                                    <i class="fa fa-fw fa-save" aria-hidden="true"></i> Save Module
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <module-edit-form :module="moduleInformation"></module-edit-form>
+                    
                     <pre>{{moduleInformation}}</pre>
                 </div>
             </div>
@@ -162,16 +73,10 @@
                 errors: {},
             }
         },
+        components: {
+            'moduleEditForm': require('./ModuleEditForm.vue')
+        },
         methods: {
-            fetchCategories() {
-                var _this = this;
-                this.$http.get('/api/category').then((response) => {
-                    _this.categories = response.data;
-                }, (response) => {
-                    console.error("Could not load categories.");
-                    console.error(response);
-                })
-            },
             fetchRepositories() {
                 var _this = this;
                 _this.loading = true;
@@ -200,50 +105,15 @@
                 }
 
                 this.step = 2;
-            },
-            saveModule() {
-                var _this = this;
-                
-                if (_this.moduleInformation.name.length <= 0) {
-                    return;
-                }
-
-                _this.saving = true;
-                this.$http.post('/api/module', _this.moduleInformation).then((response) => {
-                    _this.saving = false;
-                    if (response.data && response.data.id) {
-                        window.location.href = "/module/" + response.data.id;
-                    }
-                }, (response) => {
-                    _this.saving = false;
-                    _this.errors = response.data || {};
-                    console.error(response);
-                })
-            },
-            openURL(url) {
-                window.open(url);
-            },
-            generateGithubUrl(moduleInformation) {
-                return 'https://github.com/' + moduleInformation.github_user + '/' + moduleInformation.github_name;
-            },
-            searchTags(query) {
-                if (query.length < 2 ) {
-                    this.tagSuggestions = [];
-                    return;
-                }
-
-                this.tagSuggestion = [query];
-
-                var _this = this;
-                _this.$http.get('/api/tag/' + query).then((response) => {
-                    _this.tagSuggestions = response.data;
-                    _this.tagSuggestions.splice(0, 0, query);
-                });
-            }
+            }     
         },
         mounted() {
-            this.fetchCategories();
             this.fetchRepositories();
+
+            var _this = this;
+            this.$on("SAVED", function(module) {
+                alert('module created, navigate to page');
+            })
         }
     }
 </script>

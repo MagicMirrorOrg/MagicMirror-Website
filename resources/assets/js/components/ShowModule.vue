@@ -20,7 +20,7 @@
                         <button class="btn btn-block edit-button" 
                             @click.prevent="editMode = !editMode" 
                             :class="{'btn-secondary':!editMode,'btn-success':editMode}"
-                            v-if="user.github_user == module.github_user">
+                            v-if="user.github_user == module.github_user || user.admin">
                                 <i class="fa fa-edit" aria-hidden="true"></i> Edit Module
                         </button>
                         <module-panel :module="module"></module-panel>
@@ -46,7 +46,7 @@
             },
             user: {
                 default: function() {
-                    return {};
+                    return {admin: true};
                 }
             }   
         },

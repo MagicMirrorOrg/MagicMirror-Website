@@ -87,7 +87,7 @@
                     <button type="submit" class="btn btn-primary btn-lg" :disabled="moduleCopy.name.length <= 0 || saving">
                         <i class="fa fa-fw fa-save" aria-hidden="true"></i> Save Module
                     </button>
-                    <button @click.prevent="$parent.$emit('CANCEL_EDIT')" class="btn btn-secondary btn-lg" :disabled="saving">
+                    <button @click.prevent="$parent.$emit('CANCEL_EDIT')" class="btn btn-secondary btn-lg" :disabled="saving" v-if="moduleCopy.id > 0">
                         <i class="fa fa-fw fa-ban" aria-hidden="true"></i> Cancel
                     </button>
                 </div>
@@ -160,6 +160,9 @@
                     _this.tagSuggestions = response.data;
                     _this.tagSuggestions.splice(0, 0, query);
                 });
+            },
+            openURL(url) {
+                window.open(url);
             }
         },
         mounted() {
