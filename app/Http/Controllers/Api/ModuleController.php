@@ -92,6 +92,9 @@ class ModuleController extends ApiController
     {
         $module->addLikedForUser(Auth::guard('api')->user());
 
+        $module->views++;
+        $module->save();
+
         return $module;
     }
 
