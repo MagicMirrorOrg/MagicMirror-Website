@@ -59,7 +59,7 @@ class ModuleController extends ApiController
      */
     public function store(Request $request)
     {
-        if (!Auth::guard('api')->user()->admin && $request->get('github_name') !== Auth::guard('api')->user()->github_name) {
+        if (!Auth::guard('api')->user()->admin && $request->get('github_user') != Auth::guard('api')->user()->github_user) {
             abort(403);
         }
 
@@ -115,7 +115,7 @@ class ModuleController extends ApiController
      */
     public function update(Request $request, Module $module)
     {
-        if (!Auth::guard('api')->user()->admin && $request->get('github_name') !== Auth::guard('api')->user()->github_name) {
+        if (!Auth::guard('api')->user()->admin && $request->get('github_user') != Auth::guard('api')->user()->github_user) {
             abort(403);
         }
 
