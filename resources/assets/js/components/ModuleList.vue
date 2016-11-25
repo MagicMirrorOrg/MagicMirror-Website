@@ -3,8 +3,20 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>MagicMirror² Modules</h1>
+                <p class="lead">Want to add some features to your mirror? Check out these modules &hellip;</p>
             </div>
         </div>
+        
+        <div class="filter-bar" v-if="filter.tag || filter.category">
+            <div class="container">
+                <router-link to="/modules"> 
+                    <div v-if="filter.tag">You are currently filtering on tag: <strong>{{filter.tag}}</strong>.</div>
+                    <div v-if="filter.category && categories[filter.category]">You are currently filtering on category: <strong>{{categories[filter.category]}}</strong>.</div>
+                    <small>Click here to remove filter.</small>
+                </router-link>
+            </div>
+        </div>
+
         <div class="container">
 
             <ul class="list-group" v-if="loading">
@@ -12,7 +24,6 @@
                     <i class="fa fa-spinner fa-pulse fa-fw"></i> Loading modules &hellip;
                 </li>
             </ul>
-
 
             <div class="card-columns">
 
@@ -25,8 +36,16 @@
                 </div>
 
                 <module-panel :module="module" v-for="module in modules"></module-panel>
+   
             </div>
 
+        </div>
+        <div class="container" v-if="loadMoreButton">
+            <div class="row">
+                <div class="col-sm-4 offset-sm-4">
+                    <button class="btn btn-secondary btn-block" @click="fetchModules">Load more &hellip;</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -38,7 +57,10 @@
         data() {
             return {
                 loading: false,
-                modules: []
+                modules: [],
+                categories: {},
+                loadMoreButton: false,
+                filter: this.$route.query
             }
         },
         computed: {
@@ -47,12 +69,32 @@
             }
         },
         methods: {
+            fetchCategories() {
+                var _this = this;
+                this.$http.get('/api/category').then((response) => {
+                    response.data.forEach((category) => {
+                        _this.categories[category.id] = category.name;
+                    });
+                })
+            },
             fetchModules() {
                 var _this = this;
+                var params = {
+                    offset: this.modules.length,
+                    limit: 25,
+                }
+                if (this.filter) {
+                    params.filter = this.filter;
+                }
+
                 _this.loading = true;
-                this.$http.get('/api/module').then((response) => {
+                _this.loadMoreButton = false;
+                this.$http.get('/api/module', {params: params}).then((response) => {
                     _this.loading = false;
-                    _this.modules = response.data;
+                    _this.modules = this.modules.concat(response.data);
+
+                    _this.loadMoreButton = response.data.length === params.limit;
+
                 }, (response) => {
                     _this.loading = false;
                     console.error(response);
@@ -60,7 +102,46 @@
             },
         },
         mounted() {
+            this.fetchCategories();
             this.fetchModules();
+        },
+        watch: {
+            filter: {
+                handler() {
+                    this.modules = [];
+                    this.fetchModules();
+                }, 
+                deep: true
+            },
+            '$route.query': function(query) {
+                console.log(query);
+                this.filter = query
+            }
         }
     }
 </script>
+
+<style lang="sass">
+    .filter-bar {
+
+        background: #0275d8;
+        margin-top: -2rem;
+        margin-bottom: 2rem;
+        a {
+            padding: 10px 0;
+            display:block;
+            text-align: center;
+            color: lighten(#0275d8, 50%);
+            strong {
+                color: white;
+            }
+            small {
+                color: lighten(#0275d8, 25%);
+            }
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        
+    }
+</style>

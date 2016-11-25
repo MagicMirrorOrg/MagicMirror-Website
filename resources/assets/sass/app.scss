@@ -155,16 +155,16 @@ form {
 
 
 
-
+.jumbotron {
+        background-image: url('/img/mirror.png');
+        background-position: 600px -100px;
+        background-repeat: no-repeat;
+        position: relative;
+}
 
 
 .home-page {
-    .jumbotron {
-            background-image: url('/img/mirror.png');
-            background-position: 600px -100px;
-            background-repeat: no-repeat;
-            position: relative;
-    }
+
 
     .magpi-watermark {
         position: absolute;

@@ -3,6 +3,7 @@
         <div class="jumbotron">
             <div class="container">
                 <h1> Add your Module</h1>
+                <p class="lead">Built something cool? Add your module down below &hellip;</p>
             </div>
         </div>
         <div class="container">
@@ -26,6 +27,14 @@
                     </div>
                 </div>
             </ul>
+
+            <div class="input-group" v-if="step == 1 && user.admin" style="margin-bottom: 15px;">
+                <input type="text" class="form-control form-control-lg" placeholder="Repository URL" v-model="repositoryURL">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-lg" type="button" @click="addCustomRepository"><i class="fa fa-plus fa-fw"></i></button>
+                </span>
+            </div>
+
                     
             <div class="list-group" v-if="step == 1">
                 <div class="list-group-item header">
@@ -51,8 +60,6 @@
                 </div>
                 <div class="list-group-item">
                     <module-edit-form :module="moduleInformation"></module-edit-form>
-                    
-                    <pre>{{moduleInformation}}</pre>
                 </div>
             </div>
         </div>
@@ -60,6 +67,9 @@
 </template>
 
 <script>
+    import userStore from './../store/user.js';
+
+
     export default {
         data() {
             return {
@@ -71,6 +81,12 @@
                 tagSuggestions: [],
                 moduleInformation: false,
                 errors: {},
+                repositoryURL: null
+            }
+        },
+        computed: {
+            user() {
+                return userStore.state.user || {};
             }
         },
         components: {
@@ -105,14 +121,29 @@
                 }
 
                 this.step = 2;
-            }     
+            },
+            addCustomRepository() {
+                console.log(this.repositoryURL);
+                const regex = /^(https*:\/\/github.com\/)([0-9a-zA-Z_-]+)\/([0-9a-zA-Z_-]+)/g;
+                var m;
+                while ((m = regex.exec(this.repositoryURL)) !== null) {
+                    console.log(m);
+                    if (m.length >= 4) {
+                        var _this = this;
+                        this.$http.get('/api/github/' + m[2] + '/' + m[3]).then((response) => {
+                            console.log(response.data);
+                            _this.selectRepository(response.data);
+                        });
+                    }
+                }
+            }   
         },
         mounted() {
             this.fetchRepositories();
 
             var _this = this;
             this.$on("SAVED", function(module) {
-                alert('module created, navigate to page');
+                this.$router.push(module.uri);
             })
         }
     }

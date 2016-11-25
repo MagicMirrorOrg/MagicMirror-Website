@@ -7,10 +7,17 @@
         <router-link :to="module.uri"><img class="img-fluid" :src="'/image/' + module.image + '/400x400'" v-if="module.image"></router-link>
         <router-link class="no-image-available" :to="module.uri" v-if="!module.image"><span>No image available.</span></router-link>
         <div class="card-block">
-            <p class="card-text category-name">{{module.category.name}}</p>
+            <router-link class="card-text category-name" :to="{ path: '/modules', query: { category: module.category.id }}">{{module.category.name}}</router-link>
             <p class="card-text">{{module.description}}</p>
             <p class="card-text tags">
-                <a href="#" class="tag tag-default" v-for="tag in module.tags">{{tag}}</a>    
+                <a href="#"  >{{tag}}</a>    
+                <router-link    :to="{ path: '/modules', query: { tag: tag }}" 
+                                class="tag tag-default" 
+                                v-for="tag in module.tags">
+                                
+                                {{tag}}
+                                
+                </router-link>
             </p>
         </div>
         <div class="card-footer text-muted">

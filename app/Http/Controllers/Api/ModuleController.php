@@ -16,9 +16,25 @@ class ModuleController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Module::all()->each(function($module) {
+        $offset = $request->get('offset', 0);
+        $limit =  $request->get('limit', 10);
+        $filter = $request->get('filter', []);
+
+        $modules = Module::orderBy('id','desc')->skip($offset)->take($limit);
+
+        if (array_key_exists('tag', $filter)) {
+            $modules = $modules->whereHas('tags', function ($query) use ($filter) {
+                $query->where('name', 'like', '%'.$filter['tag'].'%');
+            });
+        }
+
+        if (array_key_exists('category', $filter)) {
+            $modules = $modules->where('category_id', '=', $filter['category']);
+        }
+
+        return $modules->get()->each(function($module) {
             if (!Auth::guard('api')->guest()) {
                 $module->addLikedForUser(Auth::guard('api')->user());
             }

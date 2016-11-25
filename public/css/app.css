@@ -7395,7 +7395,7 @@ form {
     margin-bottom: 10px;
     padding: 5px 10px; }
 
-.home-page .jumbotron {
+.jumbotron {
   background-image: url("/img/mirror.png");
   background-position: 600px -100px;
   background-repeat: no-repeat;
