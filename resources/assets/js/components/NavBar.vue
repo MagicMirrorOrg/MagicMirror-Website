@@ -10,7 +10,6 @@
                
                     <li class="nav-item" v-if="!user"><a href="/login" class="btn btn-outline-primary"><i class="fa fa-github" aria-hidden="true"></i> Login with GitHub</a></li>
 
-                
                     <div v-if="user">
                         <img :src="user.avatar" class="rounded-circle avatar">
                         <li class="nav-item dropdown">
@@ -18,6 +17,8 @@
                                 {{ user.name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="responsiveNavbarDropdown">
+                                <router-link :to="{ path: '/modules', query: { user: user.github_user }}" class="dropdown-item"><i class="fa fa-fw fa-cubes" aria-hidden="true"></i> My Modules</router-link>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" @click.prevent="logout()">
                                     <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout
                                 </a>

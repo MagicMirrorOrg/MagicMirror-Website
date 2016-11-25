@@ -34,6 +34,10 @@ class ModuleController extends ApiController
             $modules = $modules->where('category_id', '=', $filter['category']);
         }
 
+        if (array_key_exists('user', $filter)) {
+            $modules = $modules->where('github_user', '=', $filter['user']);
+        }
+
         return $modules->get()->each(function($module) {
             if (!Auth::guard('api')->guest()) {
                 $module->addLikedForUser(Auth::guard('api')->user());

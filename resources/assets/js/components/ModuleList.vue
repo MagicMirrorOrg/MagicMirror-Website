@@ -7,11 +7,12 @@
             </div>
         </div>
         
-        <div class="filter-bar" v-if="filter.tag || filter.category">
+        <div class="filter-bar" v-if="filter.tag || filter.category || filter.user">
             <div class="container">
                 <router-link to="/modules"> 
                     <div v-if="filter.tag">You are currently filtering on tag: <strong>{{filter.tag}}</strong>.</div>
                     <div v-if="filter.category && categories[filter.category]">You are currently filtering on category: <strong>{{categories[filter.category]}}</strong>.</div>
+                    <div v-if="filter.user">You are currently filtering on user: <strong>{{filter.user}}</strong>.</div>
                     <small>Click here to remove filter.</small>
                 </router-link>
             </div>
