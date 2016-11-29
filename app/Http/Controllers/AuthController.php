@@ -62,7 +62,7 @@ class AuthController extends Controller
     {
         if ($authUser = User::where('github_id', $githubUser->id)->first()) {
             
-            $authUser->name = $githubUser->name;
+            $authUser->name = ($githubUser->name) ? $githubUser->name : $githubUser->nickname;
             $authUser->email = $githubUser->email;
             $authUser->github_user = $githubUser->nickname;
             $authUser->github_token = $githubUser->token;
@@ -73,7 +73,7 @@ class AuthController extends Controller
         }
 
         return User::create([
-            'name' => $githubUser->name,
+            'name' => ($githubUser->name) ? $githubUser->name : $githubUser->nickname,
             'email' => $githubUser->email,
             'github_id' => $githubUser->id,
             'github_user' => $githubUser->nickname,
