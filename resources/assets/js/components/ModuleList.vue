@@ -83,7 +83,6 @@
                     var dateA = new Date(segmentsA[0], segmentsA[1]-1, segmentsA[2], segmentsA[3], segmentsA[4], segmentsA[5]);
                     var dateB = new Date(segmentsB[0], segmentsB[1]-1, segmentsB[2], segmentsB[3], segmentsB[4], segmentsB[5]);
 
-                    console.log(dateA, dateB);
                     return dateB - dateA;
                 });
             }
