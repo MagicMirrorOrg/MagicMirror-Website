@@ -43,18 +43,16 @@
         },
         methods: {
             fetchReadme() {
-                var _this = this;
-
-                var url = "/api/module/" + _this.module.id + "/readme";
-                _this.loading = true;
-                _this.error = false;
+                var url = "/api/module/" + this.module.id + "/readme";
+                this.loading = true;
+                this.error = false;
 
                 this.$http.get(url).then((response) => {
-                    _this.loading = false;
-                    _this.readme = response.data;
+                    this.loading = false;
+                    this.readme = response.data;
                 }, (response) => {
-                    _this.loading = false;
-                    _this.error = true;
+                    this.loading = false;
+                    this.error = true;
                     console.error(response);
                 })
             }

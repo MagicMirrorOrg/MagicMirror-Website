@@ -117,34 +117,32 @@
         },
         methods: {
             fetchCategories() {
-                var _this = this;
                 this.$http.get('/api/category').then((response) => {
-                    _this.categories = response.data;
+                    this.categories = response.data;
                 }, (response) => {
                     console.error("Could not load categories.");
                     console.error(response);
                 })
             },
             saveModule() {
-                var _this = this;
                 
-                if (_this.moduleCopy.name.length <= 0) {
+                if (this.moduleCopy.name.length <= 0) {
                     return;
                 }
 
-                _this.saving = true;
+                this.saving = true;
 
-                var method = (_this.moduleCopy.id > 0) ? "put" :"post";
-                var url = (_this.moduleCopy.id > 0) ? "/api/module/" + _this.moduleCopy.id : "/api/module";
+                var method = (this.moduleCopy.id > 0) ? "put" :"post";
+                var url = (this.moduleCopy.id > 0) ? "/api/module/" + this.moduleCopy.id : "/api/module";
 
-                _this.$http[method](url, _this.moduleCopy).then((response) => {
-                    _this.saving = false;
+                this.$http[method](url, this.moduleCopy).then((response) => {
+                    this.saving = false;
                     if (response.data) {
-                        _this.$parent.$emit('SAVED', response.data);
+                        this.$parent.$emit('SAVED', response.data);
                     }
                 }, (response) => {
-                    _this.saving = false;
-                    _this.errors = response.data || {};
+                    this.saving = false;
+                    this.errors = response.data || {};
                     console.error(response);
                 })
             },
@@ -159,10 +157,9 @@
 
                 this.tagSuggestion = [query];
 
-                var _this = this;
-                _this.$http.get('/api/tag/' + query).then((response) => {
-                    _this.tagSuggestions = response.data;
-                    _this.tagSuggestions.splice(0, 0, query);
+                this.$http.get('/api/tag/' + query).then((response) => {
+                    this.tagSuggestions = response.data;
+                    this.tagSuggestions.splice(0, 0, query);
                 });
             },
             openURL(url) {

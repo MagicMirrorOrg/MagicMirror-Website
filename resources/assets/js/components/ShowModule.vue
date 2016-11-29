@@ -62,26 +62,24 @@
         },
         methods: {
             fetchModule() {
-                var _this = this;
-                _this.loading = true;
+                this.loading = true;
                 this.$http.get("/api/module/" + this.moduleId).then((response) => {
-                    _this.loading = false;
-                    _this.module = response.data;
+                    this.loading = false;
+                    this.module = response.data;
                 }, (response) => {
-                    _this.loading = false;
+                    this.loading = false;
                     console.error(response);
                 })
             }
         },
         created() {
             this.fetchModule();
-            var _this = this;
-            this.$on("SAVED", function(module) {
-                _this.editMode = false;
-                _this.module = module;
+            this.$on("SAVED", (module) => {
+                this.editMode = false;
+                this.module = module;
             })
-            this.$on("CANCEL_EDIT", function(module) {
-                _this.editMode = false;
+            this.$on("CANCEL_EDIT", (module) => {
+                this.editMode = false;
             })
         }
     }

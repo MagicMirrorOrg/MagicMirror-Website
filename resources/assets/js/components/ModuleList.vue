@@ -71,15 +71,13 @@
         },
         methods: {
             fetchCategories() {
-                var _this = this;
                 this.$http.get('/api/category').then((response) => {
                     response.data.forEach((category) => {
-                        _this.categories[category.id] = category.name;
+                        this.categories[category.id] = category.name;
                     });
                 })
             },
             fetchModules() {
-                var _this = this;
                 var params = {
                     offset: this.modules.length,
                     limit: 25,
@@ -88,16 +86,14 @@
                     params.filter = this.filter;
                 }
 
-                _this.loading = true;
-                _this.loadMoreButton = false;
+                this.loading = true;
+                this.loadMoreButton = false;
                 this.$http.get('/api/module', {params: params}).then((response) => {
-                    _this.loading = false;
-                    _this.modules = this.modules.concat(response.data);
-
-                    _this.loadMoreButton = response.data.length === params.limit;
-
+                    this.loading = false;
+                    this.modules = this.modules.concat(response.data);
+                    this.loadMoreButton = response.data.length === params.limit;
                 }, (response) => {
-                    _this.loading = false;
+                    this.loading = false;
                     console.error(response);
                 })
             },

@@ -86,7 +86,6 @@
 
             },
             uploadFile: function() {
-                var self = this;
                 this.uploading = true;
                 this.uploadDone = false;
 
@@ -94,18 +93,18 @@
                 data.append('file', this.fileObject);
 
                 this.$http.post('/upload', data).then((response) => {
-                    self.uploading = false;
-                    self.uploadDone = true;
-                    self.remoteFilePath = response.data.path;
-                    self.remoteFileName = response.data.file;
-                    self.error = false;
+                    this.uploading = false;
+                    this.uploadDone = true;
+                    this.remoteFilePath = response.data.path;
+                    this.remoteFileName = response.data.file;
+                    this.error = false;
 
-                    self.$emit('input', response.data.file);
+                    this.$emit('input', response.data.file);
                 }, (response) => {
-                    self.removeImage();
-                    self.uploading = false;
-                    self.uploadDone = false;
-                    self.error = (response.data.file) ? response.data.file[0] : 'An unknown error occured. (' + response.status + ')';
+                    this.removeImage();
+                    this.uploading = false;
+                    this.uploadDone = false;
+                    this.error = (response.data.file) ? response.data.file[0] : 'An unknown error occured. (' + response.status + ')';
                 });
 
             }

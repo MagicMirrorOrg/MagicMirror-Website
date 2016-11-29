@@ -94,14 +94,13 @@
         },
         methods: {
             fetchRepositories() {
-                var _this = this;
-                _this.loading = true;
+                this.loading = true;
                 this.$http.get('/api/me/repositories').then((response) => {
-                    _this.errors = {};
-                    _this.loading = false;
-                    _this.repositories = response.data;
+                    this.errors = {};
+                    this.loading = false;
+                    this.repositories = response.data;
                 }, (response) => {
-                    _this.loading = false;
+                    this.loading = false;
                     console.error(response);
                 })
             },
@@ -129,10 +128,9 @@
                 while ((m = regex.exec(this.repositoryURL)) !== null) {
                     console.log(m);
                     if (m.length >= 4) {
-                        var _this = this;
                         this.$http.get('/api/github/' + m[2] + '/' + m[3]).then((response) => {
                             console.log(response.data);
-                            _this.selectRepository(response.data);
+                            this.selectRepository(response.data);
                         });
                     }
                 }
@@ -140,9 +138,7 @@
         },
         mounted() {
             this.fetchRepositories();
-
-            var _this = this;
-            this.$on("SAVED", function(module) {
+            this.$on("SAVED", (module) => {
                 this.$router.push(module.uri);
             })
         }
