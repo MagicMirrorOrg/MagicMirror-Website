@@ -7,7 +7,9 @@
         <router-link :to="module.uri"><img class="img-fluid" :src="'/image/' + module.image + '/400x400'" v-if="module.image"></router-link>
         <router-link class="no-image-available" :to="module.uri" v-if="!module.image"><span>No image available.</span></router-link>
         <div class="card-block">
-            <router-link class="card-text category-name" :to="{ path: '/modules', query: { category: module.category.id }}">{{module.category.name}}</router-link>
+            <router-link class="card-text category-name" :to="{ path: '/modules', query: { category: module.category.id }}">{{module.category.name}}</router-link> 
+            <span class="by-label">by</span>
+            <router-link class="card-text category-name" :to="{ path: '/modules', query: { user: module.github_user }}">{{module.github_user}}</router-link>
             <p class="card-text">{{module.description}}</p>
             <p class="card-text tags">
                 <a href="#"  >{{tag}}</a>    
@@ -99,6 +101,11 @@
         font-size: 0.8rem;
         font-weight: bold;
         margin-bottom: 5px;
+    }
+    .by-label {
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        color: #ccc;
     }
     .tag {
         margin-right: 2px;
