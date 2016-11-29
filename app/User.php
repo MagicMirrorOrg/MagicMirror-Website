@@ -45,18 +45,20 @@ class User extends Authenticatable
 
     /**
     * Returns a collection repositories.
-    * 
+    *
     * @return Collection;
     */
     public function repositories()
     {
-        return collect($this->githubClient()->api('current_user')->repositories());
+        // use query search because the current_user 30 limit repositories include forks
+        $query = 'user:' . $this->github_user;
+        return collect($this->githubClient()->api('search')->repositories($q = $query)['items']);
     }
 
 
     /**
     * Returns a collection of non forked repositories.
-    * 
+    *
     * @return Collection;
     */
     public function nonForkedRepositories()
@@ -68,7 +70,7 @@ class User extends Authenticatable
 
     /**
     * Returns a collection of the user's modules.
-    * 
+    *
     * @return Collection;
     */
     public function modules()
@@ -78,7 +80,7 @@ class User extends Authenticatable
 
     /**
     * Returns an authenticated github client.
-    * 
+    *
     * @return Github\Client;
     */
     private function githubClient() {
@@ -95,5 +97,5 @@ class User extends Authenticatable
     public function likes() {
         return $this->belongsToMany('MagicMirror\Module', 'likes');
     }
-    
+
 }
