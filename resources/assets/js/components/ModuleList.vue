@@ -53,13 +53,13 @@
 <script>
 
     import userStore from './../store/user.js';
+    import categoryStore from './../store/category.js';
 
     export default {
         data() {
             return {
                 loading: false,
                 modules: [],
-                categories: {},
                 loadMoreButton: false,
                 filter: this.$route.query
             }
@@ -67,16 +67,17 @@
         computed: {
             user() {
                 return userStore.state.user;
+            },
+            categories() {
+                var categories = {};
+                categoryStore.state.categories.forEach((category) => {
+                    categories[category.id] = category.name;
+                });
+
+                return categories;
             }
         },
         methods: {
-            fetchCategories() {
-                this.$http.get('/api/category').then((response) => {
-                    response.data.forEach((category) => {
-                        this.categories[category.id] = category.name;
-                    });
-                })
-            },
             fetchModules() {
                 var params = {
                     offset: this.modules.length,
@@ -99,7 +100,6 @@
             },
         },
         mounted() {
-            this.fetchCategories();
             this.fetchModules();
         },
         watch: {
@@ -111,7 +111,6 @@
                 deep: true
             },
             '$route.query': function(query) {
-                console.log(query);
                 this.filter = query
             }
         }

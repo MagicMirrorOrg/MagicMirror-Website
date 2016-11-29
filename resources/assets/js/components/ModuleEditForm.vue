@@ -96,6 +96,9 @@
     </div>
 </template>
 <script>
+    import categoryStore from './../store/category.js';
+
+
     export default {
         props: ['module'],
         components: {
@@ -106,24 +109,18 @@
             return {
                 saving: false,
                 errors: {},
-                categories: [],
                 tagSuggestions: [],
             }
         },
         computed: {
             moduleCopy: function() {
                 return Vue.util.extend({}, this.module);
+            },
+            categories() {
+                return categoryStore.state.categories;
             }
         },
         methods: {
-            fetchCategories() {
-                this.$http.get('/api/category').then((response) => {
-                    this.categories = response.data;
-                }, (response) => {
-                    console.error("Could not load categories.");
-                    console.error(response);
-                })
-            },
             saveModule() {
                 
                 if (this.moduleCopy.name.length <= 0) {
@@ -165,9 +162,6 @@
             openURL(url) {
                 window.open(url);
             }
-        },
-        mounted() {
-            this.fetchCategories();
         }
     }
 </script>

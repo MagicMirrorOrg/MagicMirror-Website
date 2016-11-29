@@ -27,6 +27,7 @@ Vue.component('modulePanel', require('./components/ModulePanel.vue'));
 
 
 import userStore from './store/user.js';
+import categoryStore from './store/category.js';
 
 const routes = [
   { path: '/', component: { template: '<home-component></home-component>' }},
@@ -46,5 +47,6 @@ const app = new Vue({
     router,
     mounted() {
         userStore.dispatch('fetchUser');
+        categoryStore.dispatch('fetchCategories');
     }
 });
