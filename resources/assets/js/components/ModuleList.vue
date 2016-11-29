@@ -28,7 +28,7 @@
 
             <div class="card-columns">
 
-                <div class="card card-inverse text-xs-center" style="background-color: #333; border-color: #333;" v-if="user">
+                <div class="card card-inverse text-xs-center" style="background-color: #333; border-color: #333;" v-if="user && !loading">
                     <div class="card-block">
                         <h3 class="card-title">Are you a developer?</h3>
                         <p class="card-text">Create your own modules and add them to the list!</p>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <module-panel :module="module" v-for="module in modules"></module-panel>
+                <module-panel :module="module" v-for="module in sortedModules"></module-panel>
    
             </div>
 
@@ -75,6 +75,17 @@
                 });
 
                 return categories;
+            },
+            sortedModules() {
+                return this.modules.sort((a,b) => {
+                    var segmentsA = a.created_at.split(/[- :]/);
+                    var segmentsB = b.created_at.split(/[- :]/);
+                    var dateA = new Date(segmentsA[0], segmentsA[1]-1, segmentsA[2], segmentsA[3], segmentsA[4], segmentsA[5]);
+                    var dateB = new Date(segmentsB[0], segmentsB[1]-1, segmentsB[2], segmentsB[3], segmentsB[4], segmentsB[5]);
+
+                    console.log(dateA, dateB);
+                    return dateB - dateA;
+                });
             }
         },
         methods: {
