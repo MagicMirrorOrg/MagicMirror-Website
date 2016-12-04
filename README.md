@@ -17,3 +17,10 @@ Clone this repository, take the following steps to get it up and running:
  * Run `php artisan key:generate`
  * Modify the database and GitHub settings in the .env file. (You need to create a GitHub app for testing.)
  * Run php artisan migrate --seed to setup the database.
+
+### Extra information for developement mode
+
+For install composer
+
+ `sudo apt-get install curl php5-cli php5-curl`
+ `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer`
