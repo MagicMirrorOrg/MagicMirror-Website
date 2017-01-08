@@ -7,6 +7,7 @@ use MagicMirror\Http\Controllers\Api\ApiController;
 use Auth;
 use MagicMirror\Module;
 use MagicMirror\Tag;
+use MagicMirror\Category;
 use GrahamCampbell\GitHub\Facades\GitHub;
 
 class ModuleController extends ApiController
@@ -205,6 +206,21 @@ class ModuleController extends ApiController
 
         return $module;
     }
+
+    /**
+     * Display module list by category name.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function category(Request $request, $category_name)
+    {
+        $category = Category::where('name', '=', $category_name)->first();
+        if (count($category) > 0) {
+            $filters = $request->get('filter', []);
+            $filters['category'] = $category->id;
+            $request['filter'] = $filters;
+        }
+        return $this->index($request);
+    }
+
 }
-
-
