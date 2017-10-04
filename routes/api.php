@@ -24,5 +24,6 @@ Route::resource("module", "Api\ModuleController");
 Route::get("module/{module}/repository", "Api\ModuleController@repository");
 Route::get("module/{module}/readme", "Api\ModuleController@readme");
 Route::post("module/{module}/liked", "Api\ModuleController@liked")->middleware('auth:api');
+Route::get("module/category/{category_name}", "Api\ModuleController@category");
 
 Route::get("/github/{user}/{repository}", "Api\GitHubController@fetch");
