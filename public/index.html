@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" >
-    <link href="style.css?v=3" rel="stylesheet">
+    <link href="style.css?v=4" rel="stylesheet">
     <script src="https://use.fontawesome.com/4e3db0fa2e.js"></script>
 </head>
 <body>
@@ -160,7 +160,7 @@
                     <div class="spacer-line"></div>
                 </div>
                 <div>
-                    <div class="crypto-list-item">
+                    <a class="crypto-list-item" href="#">
                         <div class="crypto-logo">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="20px" height="20px" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 4091.27 4091.73" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
                                 <g>
@@ -175,8 +175,8 @@
                         <div class="crypto-address">
                             13Jm2TtZ7qxg2VYf9WuVMZZHDFwwMJcqBG
                         </div>
-                    </div>
-                    <div class="crypto-list-item">
+                    </a>
+                    <a class="crypto-list-item" href="#">
                         <div class="crypto-logo">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="20px" height="20px" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 784.37 1277.39" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
                                 <g>
@@ -195,8 +195,8 @@
                         <div class="crypto-address">
                             0xaBee8971681c46f97DA61c0045feeef9d9600e7A
                         </div>
-                    </div>
-                    <div class="crypto-list-item">
+                    </a>
+                    <a class="crypto-list-item" href="#">
                         <div class="crypto-logo">
                             <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="20px" height="20px" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 82.6 82.6" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
                                 <circle cx="41.3" cy="41.3" r="36.83" style="fill:#fff"/>
@@ -209,7 +209,7 @@
                         <div class="crypto-address">
                             LbiuXz2P7bj1bNfhTx5reoGM6UXozXuWcV
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -262,6 +262,48 @@
 
     ga('create', 'UA-1219071-59', 'auto');
     ga('send', 'pageview');
+
+    </script>
+    <script>
+        const elements = [...document.getElementsByClassName('crypto-list-item')]
+        elements.forEach(function(element) {
+            element.addEventListener('click', function(e) {
+                e.preventDefault()
+
+                const cryptoAddressContainer = element.getElementsByClassName('crypto-address')[0]
+                const address = cryptoAddressContainer.innerText.trim();
+
+                if (!copyStringToClipboard(address)) {
+                    console.log('Could not copy address to clipboard.')
+                    return
+                }
+
+                cryptoAddressContainer.innerText = 'Copied to clipboard!';
+                setTimeout(() => cryptoAddressContainer.innerText = address, 2000);
+
+            });
+        })
+
+
+        function copyStringToClipboard(value) {
+            var textArea = document.createElement("textarea")
+            textArea.value = value
+            textArea.style.position = 'absolute'
+            textArea.style.top = '-9999px'
+            document.body.appendChild(textArea)
+            textArea.select()
+
+            try {
+                document.execCommand('copy')
+            } catch (err) {
+                document.body.removeChild(textArea)
+                return false
+            }
+
+            document.body.removeChild(textArea)
+            console.log('Copied:  ' + value)
+            return true
+        }
 
     </script>
 </body>
