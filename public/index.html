@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
     <link href="style.css?v=6" rel="stylesheet">
+    <script type="module" src="main.js"></script>
 </head>
 
 <body>
@@ -32,6 +33,11 @@
                 <li><a href="https://forum.magicmirror.builders"><i class="fa-solid fa-fw fa-users" aria-hidden="true"></i> Forum</a></li>
                 <li><a href="https://discord.gg/J5BAtvx"><i class="fa-brands fa-fw fa-discord" aria-hidden="true"></i> Discord</a></li>
                 <li><a href="https://michaelteeuw.nl/tag/magicmirror"><i class="fa-solid fa-fw fa-rss" aria-hidden="true"></i> Blog</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fa-solid fa-fw fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
@@ -140,28 +146,6 @@
             ©2016 <a href="https://michaelteeuw.nl" target="_blank">Michael Teeuw</a>, Xonay Media. Video by <a href="https://paulvincentroll.com" target="_blank">Paul-Vincent Roll</a>.
         </div>
     </footer>
-
-    <script>
-        // Mobile navbar toggle
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
-
-        // Fade-in animation on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), index * 150);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-    </script>
 </body>
 
 </html>

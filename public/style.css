@@ -1,14 +1,52 @@
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #e9ecef;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-tertiary: #777;
+    --text-muted: #999;
+    --border-color: #e7e7e7;
+    --border-light: #ddd;
+    --accent-color: #2B879E;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-tertiary: #a0a0a0;
+    --text-muted: #808080;
+    --border-color: #404040;
+    --border-light: #4a4a4a;
+    --accent-color: #3fa8c4;
+}
+
 body {
     font-family: 'Roboto Condensed', sans-serif;
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
     font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
     box-sizing: border-box;
+}
+
+/* Links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
 }
 
 /* Container */
@@ -25,8 +63,8 @@ body {
 
 /* Navbar */
 .navbar {
-    background: #fff;
-    border-top: 7px solid #2B879E;
+    background: var(--bg-primary);
+    border-top: 7px solid var(--accent-color);
     position: relative;
 }
 
@@ -45,7 +83,7 @@ body {
 }
 
 .navbar-brand {
-    color: #666 !important;
+    color: var(--text-secondary) !important;
     font-weight: 400;
     font-size: 25px;
     text-decoration: none;
@@ -53,13 +91,13 @@ body {
 }
 
 .navbar-brand .two {
-    color: #999;
+    color: var(--text-muted);
 }
 
 .navbar-toggle {
     display: none;
     background: none;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-light);
     border-radius: 4px;
     padding: 9px 10px;
     cursor: pointer;
@@ -69,7 +107,7 @@ body {
     display: block;
     width: 22px;
     height: 2px;
-    background-color: #888;
+    background-color: var(--text-tertiary);
     border-radius: 1px;
     margin: 4px 0;
 }
@@ -90,13 +128,13 @@ body {
     display: block;
     padding: 0 14px;
     line-height: 80px;
-    color: #777;
+    color: var(--text-tertiary);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .nav-menu a:hover {
-    color: #333;
+    color: var(--text-primary);
 }
 
 /* Responsive navbar */
@@ -134,7 +172,7 @@ body {
     .nav-menu a {
         line-height: 20px;
         padding: 10px 15px;
-        border-top: 1px solid #e7e7e7;
+        border-top: 1px solid var(--border-color);
     }
 }
 
@@ -157,15 +195,15 @@ body {
 }
 
 .btn-primary {
-    color: #2B879E;
-    border-color: #2B879E;
-    background-color: white;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background-color: var(--bg-primary);
 }
 
 .btn-primary:hover {
     color: white;
-    border-color: #2B879E;
-    background-color: #2B879E;
+    border-color: var(--accent-color);
+    background-color: var(--accent-color);
 }
 
 .btn-lg {
@@ -180,7 +218,7 @@ body {
     background-image: url('img/mirror.png');
     background-position: 600px -100px;
     background-repeat: no-repeat;
-    background-color: #e9ecef;
+    background-color: var(--bg-secondary);
     padding: 50px 15px;
     margin-bottom: 20px;
     position: relative;
@@ -217,7 +255,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    border: 1px solid #999;
+    border: 1px solid var(--text-muted);
 }
 
 @media (max-width: 767px) {
@@ -263,14 +301,14 @@ body {
 
 /* Footer */
 .footer {
-    border-top: 1px solid #ddd;
-    color: #999;
+    border-top: 1px solid var(--border-light);
+    color: var(--text-muted);
     padding: 15px 0;
     margin-top: 0;
 }
 
 .footer a {
-    color: #999;
+    color: var(--text-muted);
 }
 
 /* Lead text */
@@ -326,7 +364,7 @@ h1.logo {
 }
 
 h1.logo .two {
-    color: #999;
+    color: var(--text-muted);
 }
 
 h2 {
@@ -342,12 +380,12 @@ h3 {
 }
 
 p {
-    color: #666;
+    color: var(--text-secondary);
     line-height: 1.4;
 }
 
 .payoff {
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .links {
@@ -359,7 +397,7 @@ p {
 }
 
 .line {
-    border-bottom: 3px solid #2B879E;
+    border-bottom: 3px solid var(--accent-color);
     width: 75px;
     display: inline-block;
 }
@@ -371,6 +409,21 @@ p {
     color: white !important;
     margin-top: 20px;
     line-height: 40px !important;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 0 14px;
+    line-height: 80px;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.theme-toggle:hover {
+    color: var(--text-primary);
 }
 
 @media (max-width: 767px) {
