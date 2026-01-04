@@ -1,40 +1,284 @@
-html, body {
+body {
     font-family: 'Roboto Condensed', sans-serif;
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    font-size: 14px;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+/* Container */
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Text utilities */
+.text-center {
+    text-align: center;
+}
+
+/* Navbar */
 .navbar {
+    background: #fff;
     border-top: 7px solid #2B879E;
-    margin-bottom: 0;
+    border-bottom: 1px solid #e7e7e7;
+    position: relative;
 }
 
-.navbar-fixed-top {
+.navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     min-height: 80px;
+    padding: 0 15px;
 }
 
-.navbar-nav > li > a, .navbar-brand {
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 80px;
+.navbar-header {
+    display: flex;
+    align-items: center;
+    height: 80px;
 }
 
 .navbar-brand {
     color: #666 !important;
     font-weight: 400;
     font-size: 25px;
+    text-decoration: none;
+    padding: 0;
 }
 
 .navbar-brand .two {
     color: #999;
 }
 
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 9px 10px;
+    cursor: pointer;
+}
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #888;
+    border-radius: 1px;
+    margin: 4px 0;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+.nav-menu li {
+    margin: 0;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 0 14px;
+    line-height: 80px;
+    color: #777;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #333;
+}
+
+/* Responsive navbar */
+@media (max-width: 767px) {
+    .navbar-inner {
+        flex-wrap: wrap;
+    }
+    
+    .navbar-header {
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+    
+    .navbar-toggle {
+        display: block;
+    }
+    
+    .navbar-brand {
+        line-height: 20px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+    
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-menu a {
+        line-height: 20px;
+        padding: 10px 15px;
+        border-top: 1px solid #e7e7e7;
+    }
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    color: #2B879E;
+    border-color: #2B879E;
+    background-color: white;
+}
+
+.btn-primary:hover {
+    color: white;
+    border-color: #2B879E;
+    background-color: #2B879E;
+}
+
+.btn-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+
+/* Jumbotron */
 .jumbotron {
     background-image: url('img/mirror.png');
     background-position: 600px -100px;
     background-repeat: no-repeat;
+    background-color: #e9ecef;
+    padding: 50px 15px;
+    margin-bottom: 20px;
     position: relative;
 }
 
+.jumbotron h1 {
+    margin-top: 0;
+}
+
+/* Grid system */
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+@media (max-width: 991px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Video container */
+.video-container {
+    position: relative;
+    max-width: 66.666667%;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #999;
+}
+
+@media (max-width: 767px) {
+    .video-container {
+        max-width: 100%;
+    }
+}
+
+/* Centered content */
+.centered-content {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+/* MagPi logo */
+.magpi-logo {
+    max-width: 150px;
+    margin: 0 auto 20px;
+}
+
+.magpi-logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive image */
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid #ddd;
+    color: #999;
+    padding: 15px 0;
+    margin-top: 0;
+}
+
+.footer a {
+    color: #999;
+}
+
+/* Lead text */
+.lead {
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 5px 5px 25px 5px;
+}
+
+/* Existing custom styles */
 .magpi-watermark {
     position: absolute;
     z-index: 9999;
@@ -47,8 +291,6 @@ html, body {
     transform: scale(0,0);
     animation-fill-mode: forwards;
     transform-origin: 100% 50%;
-
-    -webkit-filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
     filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
 }
 
@@ -63,19 +305,35 @@ html, body {
 
 .section {
     margin-top: 100px;
+    margin-bottom: 0;
 }
 
 h1.logo {
     font-size: 100px;
     font-weight: 100;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 h1.logo .two {
     color: #999;
 }
 
+h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
 p {
     color: #666;
+    line-height: 1.4;
 }
 
 .payoff {
@@ -90,38 +348,13 @@ p {
     margin-bottom: 50px;
 }
 
-.btn-primary {
-    color: #2B879E;
-    border-color: #2B879E;
-    background-color: white;
-}
-
-.btn-primary:hover {
-    border-color: #2B879E;
-    background-color: #2B879E;
-}
-
 .line {
     border-bottom: 3px solid #2B879E;
     width: 75px;
     display: inline-block;
 }
 
-.embed-responsive  {
-    border: 1px solid #999;
-}
-
-.footer {
-    border-top: 1px solid #ddd;
-    color: #999;
-}
-
-.footer .container {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-@media (max-width : 480px) {
+@media (max-width: 480px) {
     h1.logo {
         font-size: 50px;
         font-weight: 100;
@@ -139,26 +372,15 @@ p {
         width: 60px;
         top: 40px;
     }
-    .navbar-nav > li > a {
-        line-height: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .navbar-brand {
-        line-height: 20px;
-        padding-top: 15px;
-        padding-bottom: 10px;
-    }
 }
+
 .nav-donate a {
     border-radius: 3px;
     border: 0;
     background-image: linear-gradient(100deg, rgb(0, 112, 186), rgb(0, 48, 135));
     color: white !important;
     margin-top: 20px;
-    margin-bottom: 20px;
     line-height: 40px !important;
-    padding: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -166,19 +388,6 @@ p {
         border-radius: 0 !important;
         margin: 0 !important;
     }
-}
-
-.banner-wrapper {
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
 }
 
 .donate-spacer {
@@ -199,50 +408,4 @@ p {
 .donate-spacer > .spacer-line {
     flex: 1;
     border-top: 1px solid #ddd;
-}
-
-.crypto-list-item {
-    display:flex;
-    justify-items: center;
-    font-size: 15px;
-    border: 1px solid #ddd;
-    background-color: #fcfcfc;
-    padding: 10px 10px 7px;
-    border-radius: 3px;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    text-decoration: none;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.crypto-list-item:hover {
-    background-color: rgb(43, 135, 158);
-    border-color: rgb(43, 135, 158);
-    color: white;
-    text-decoration: none;
-}
-
-.crypto-list-item:hover .crypto-currency {
-    color: white;
-}
-
-@media only screen and (max-width: 600px) {
-    .crypto-currency {
-        display: none;
-    }
-    .crypto-list-item {
-        font-size: 11px;
-    }
-}
-
-.crypto-address {
-    flex: 1;
-    text-align: right;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
-.crypto-currency {
-    font-weight: bold;
-    color: #999;
-    margin-left: 1rem;
 }
