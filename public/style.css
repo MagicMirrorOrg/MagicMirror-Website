@@ -238,7 +238,17 @@ body {
     max-width: 750px;
     margin: 0 auto;
 }
+/* Fade-in animation */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 /* MagPi logo */
 .magpi-logo {
     max-width: 150px;

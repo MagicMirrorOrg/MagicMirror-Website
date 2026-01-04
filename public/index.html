@@ -8,7 +8,6 @@
     <link rel="icon" href="img/favicon.svg">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <link href="style.css?v=6" rel="stylesheet">
 </head>
 
@@ -54,25 +53,25 @@
 
             <section class="container section links">
             <div class="grid-4">
-                <div class="text-center animated fadeInUp">
+                <div class="text-center fade-in-up">
                     <i class="fa-brands fa-4x fa-github" aria-hidden="true"></i>
                     <h2>Open Source</h2>
                     <p>MagicMirror² is Open Source, free and maintained by a big group of enthusiasts. Got a nice idea? Send us a pull request and become a part of the big list of contributors.</p>
                     <p><a class="btn btn-primary" href="https://github.com/MagicMirrorOrg/MagicMirror" target="_blank">Go to the Repository »</a></p>
                 </div>
-                <div class="text-center animated fadeInUp">
+                <div class="text-center fade-in-up">
                     <i class="fa-solid fa-4x fa-list" aria-hidden="true"></i>
                     <h2>Modular</h2>
                     <p>The core of MagicMirror² contains a strong API which allows 3rd party developers to build additional modules. Modules you can use. Modules you can develop.</p>
                     <p><a class="btn btn-primary" href="https://modules.magicmirror.builders/" target="_blank">Check out the Modules »</a></p>
                 </div>
-                <div class="text-center animated fadeInUp">
+                <div class="text-center fade-in-up">
                     <i class="fa-solid fa-4x fa-book" aria-hidden="true"></i>
                     <h2>Documented</h2>
                     <p>Read our extensive documentation to find out everything you want to know about the MagicMirror² project. The full API description allows you to build your own modules.</p>
                     <p><a class="btn btn-primary" href="https://docs.magicmirror.builders" target="_blank">Read the Docs »</a></p>
                 </div>
-                <div class="text-center animated fadeInUp">
+                <div class="text-center fade-in-up">
                     <i class="fa-solid fa-4x fa-users" aria-hidden="true"></i>
                     <h2>Community driven</h2>
                     <p>On the forum you will find a big list of MagicMirror² enthusiasts. Share your ideas, ask your questions and get support. The perfect place for you to start.</p>
@@ -146,11 +145,22 @@
         // Mobile navbar toggle
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
-        
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            this.classList.toggle('active');
+            navToggle.classList.toggle('active');
         });
+
+        // Fade-in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), index * 150);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
     </script>
 </body>
 
