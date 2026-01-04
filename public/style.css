@@ -138,7 +138,7 @@ a:hover {
 }
 
 /* Responsive navbar */
-@media (max-width: 767px) {
+@media (max-width: 825px) {
     .navbar-inner {
         flex-wrap: wrap;
     }
@@ -219,7 +219,7 @@ a:hover {
     background-position: 600px -100px;
     background-repeat: no-repeat;
     background-color: var(--bg-secondary);
-    padding: 50px 15px;
+    padding: clamp(30px, 8vw, 50px) 15px;
     margin-bottom: 20px;
     position: relative;
 }
@@ -228,7 +228,7 @@ a:hover {
     margin-top: 0;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 825px) {
     .jumbotron {
         background-image: none;
     }
@@ -238,7 +238,7 @@ a:hover {
 .grid-4 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-    gap: 30px;
+    gap: clamp(20px, 4vw, 30px);
 }
 
 /* Video container */
@@ -258,7 +258,7 @@ a:hover {
     border: 1px solid var(--text-muted);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 825px) {
     .video-container {
         max-width: 100%;
     }
@@ -313,7 +313,7 @@ a:hover {
 
 /* Lead text */
 .lead {
-    font-size: 21px;
+    font-size: clamp(18px, 3.5vw, 21px);
     font-weight: 300;
     line-height: 1.4;
     margin: 5px 5px 25px 5px;
@@ -325,7 +325,7 @@ a:hover {
     z-index: 9999;
     top: 30px;
     right: 50%;
-    width: 125px;
+    width: clamp(60px, 12vw, 125px);
     animation-name: appear;
     animation-duration: 2s;
     animation-delay: 1s;
@@ -341,13 +341,6 @@ a:hover {
     }
     to {
         transform: scale(1,1) rotate(-1deg) translateX(50%);
-    }
-}
-
-@media (max-width: 767px) {
-    .magpi-watermark {
-        width: 60px;
-        top: 40px;
     }
 }
 
@@ -368,13 +361,13 @@ h1.logo .two {
 }
 
 h2 {
-    font-size: 30px;
+    font-size: clamp(24px, 5vw, 30px);
     font-weight: 500;
     margin-bottom: 10px;
 }
 
 h3 {
-    font-size: 24px;
+    font-size: clamp(20px, 4vw, 24px);
     font-weight: 400;
     margin-bottom: 0;
 }
@@ -426,7 +419,7 @@ p {
     color: var(--text-primary);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 825px) {
     .nav-donate a {
         border-radius: 0;
         margin: 0;
