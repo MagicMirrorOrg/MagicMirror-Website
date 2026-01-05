@@ -335,16 +335,6 @@ a:hover {
     opacity: 1;
     transform: translateY(0);
 }
-/* MagPi logo */
-.magpi-logo {
-    max-width: 150px;
-    margin: 0 auto 20px;
-}
-
-.magpi-logo img {
-    max-width: 100%;
-    height: auto;
-}
 
 /* Responsive image */
 .responsive-img {
@@ -374,8 +364,18 @@ a:hover {
     margin: 5px 5px 25px 5px;
 }
 
-/* Existing custom styles */
-.magpi-watermark {
+/* MagPi images */
+.magpi-logo {
+    max-width: 150px;
+    margin: 0 auto 20px;
+}
+
+.magpi-logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+.magpi-floating {
     position: absolute;
     z-index: 9999;
     top: 30px;

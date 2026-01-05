@@ -36,6 +36,13 @@ const setTheme = (theme) => {
         ? 'fa-solid fa-fw fa-sun' 
         : 'fa-solid fa-fw fa-moon';
     localStorage.setItem('theme', theme);
+    
+    // Update magpi images
+    const magpiImages = document.querySelectorAll('.magpi-image');
+    const imageSrc = theme === 'dark' 
+        ? 'img/magpi-best-watermark.png' 
+        : 'img/magpi-best-watermark-custom.png';
+    magpiImages.forEach(img => img.src = imageSrc);
 };
 
 setTheme(getInitialTheme());
