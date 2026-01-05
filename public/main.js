@@ -44,3 +44,24 @@ themeToggle.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     setTheme(currentTheme === 'dark' ? 'light' : 'dark');
 });
+
+// Demo GIF modal
+const demoGif = document.getElementById('demoGif');
+const modal = document.getElementById('demoModal');
+const modalImg = document.getElementById('modalImg');
+const modalClose = document.querySelector('.modal-close');
+
+demoGif.addEventListener('click', () => {
+    modal.style.display = 'block';
+    modalImg.src = demoGif.src;
+});
+
+modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
