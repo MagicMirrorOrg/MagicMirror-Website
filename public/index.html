@@ -1,184 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MagicMirror²</title>
+    <link rel="icon" href="img/favicon.svg">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" >
-    <link href="style.css?v=5" rel="stylesheet">
-    <script src="https://use.fontawesome.com/4e3db0fa2e.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+    <link href="style.css?v=6" rel="stylesheet">
+    <script type="module" src="main.js"></script>
 </head>
+
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
+    <nav class="navbar">
+        <div class="navbar-inner">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
+                <button type="button" class="navbar-toggle" id="navToggle" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">MagicMirror<span class="two">²</span></a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-donate">
-                        <a href="#donate"><i class="fa fa-fw fa-diamond" aria-hidden="true"></i> Donate</a>
-                    </li>
-                    <li><a href="https://github.com/MagicMirrorOrg/MagicMirror"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Repository</a></li>
-                    <li><a href="https://docs.magicmirror.builders"><i class="fa fa-fw fa-book" aria-hidden="true"></i> Docs</a></li>
-                    <li><a href="https://modules.magicmirror.builders/"><i class="fa fa-fw fa-list" aria-hidden="true"></i> Modules</a></li>
-                    <li><a href="https://forum.magicmirror.builders"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Forum</a></li>
-                    <li><a href="https://discord.gg/J5BAtvx"><i class="fa fa-fw fa-simplybuilt" aria-hidden="true"></i> Discord</a></li>
-                    <li><a href="https://michaelteeuw.nl/tag/magicmirror"><i class="fa fa-fw fa-rss" aria-hidden="true"></i> Blog</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-donate">
+                    <a href="#donate"><i class="fa-solid fa-fw fa-gem" aria-hidden="true"></i> Donate</a>
+                </li>
+                <li><a href="https://github.com/MagicMirrorOrg/MagicMirror"><i class="fa-brands fa-fw fa-github" aria-hidden="true"></i> Repository</a></li>
+                <li><a href="https://docs.magicmirror.builders"><i class="fa-solid fa-fw fa-book" aria-hidden="true"></i> Docs</a></li>
+                <li><a href="https://modules.magicmirror.builders/"><i class="fa-solid fa-fw fa-list" aria-hidden="true"></i> Modules</a></li>
+                <li><a href="https://forum.magicmirror.builders"><i class="fa-solid fa-fw fa-users" aria-hidden="true"></i> Forum</a></li>
+                <li><a href="https://discord.gg/J5BAtvx"><i class="fa-brands fa-fw fa-discord" aria-hidden="true"></i> Discord</a></li>
+                <li><a href="https://michaelteeuw.nl/tag/magicmirror"><i class="fa-solid fa-fw fa-rss" aria-hidden="true"></i> Blog</a></li>
+                <li>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fa-solid fa-fw fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
     </nav>
 
-    <a href="#magpi"><img src="img/magpi-best-watermark-custom.png" class="magpi-watermark" alt="MagPi Top 50"></a>
+    <main>
+        <a href="#magpi"><img src="img/magpi-best-watermark-custom.png" class="magpi-floating magpi-image" alt="MagPi Top 50"></a>
 
-    <div class="jumbotron">
-        <div class="container text-center">
-            <h1 class="logo">MagicMirror<span class="two">²</span></h1>
-            <p class="lead payoff">The open source modular smart mirror platform.</p>
-            <p>
-                <a href="https://bestpractices.coreinfrastructure.org/projects/347"><img src="https://bestpractices.coreinfrastructure.org/projects/347/badge" alt="Best practices badge"></a>
-            	<a href="https://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
-            	<a href="https://snyk.io/test/github/MagicMirrorOrg/MagicMirror"><img src="https://snyk.io/test/github/MagicMirrorOrg/MagicMirror/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/MagicMirrorOrg/MagicMirror" style="max-width:100%;"></a>
-            </p>
-        </div>
-    </div>
-
-    <div class="container section links">
-        <div class="row">
-            <div class="col-md-3 text-center animated fadeInUp">
-                <i class="fa fa-4x fa-github" aria-hidden="true"></i>
-                <h2>Open Source</h2>
-                <p>MagicMirror² is Open Source, free and maintained by a big group of enthusiasts. Got a nice idea? Send us a pull request and become a part of the big list of contributors.</p>
-                <p><br><a class="btn btn-primary" href="https://github.com/MagicMirrorOrg/MagicMirror" target="_blank">Go to the Repository &raquo;</a></p>
-            </div>
-            <div class="col-md-3 text-center animated fadeInUp">
-                <i class="fa fa-4x fa-list" aria-hidden="true"></i>
-                <h2>Modular</h2>
-                <p>The core of MagicMirror² contains a strong API which allows 3rd party developers to build additional modules. Modules you can use. Modules you can develop.</p>
-                <p><br><a class="btn btn-primary" href="https://modules.magicmirror.builders/" target="_blank">Check out the Modules &raquo;</a></p>
-            </div>
-            <div class="col-md-3 text-center animated fadeInUp">
-                <i class="fa fa-4x fa-book" aria-hidden="true"></i>
-                <h2>Documented</h2>
-                <p>Read our extensive documentation to find out everything you want to know about the MagicMirror² project. The full API description allows you to build your own modules.</p>
-                <p><br><a class="btn btn-primary" href="https://docs.magicmirror.builders" target="_blank">Read the Docs &raquo;</a></p>
-            </div>
-            <div class="col-md-3 text-center animated fadeInUp">
-                <i class="fa fa-4x fa-users" aria-hidden="true"></i>
-                <h2>Community driven</h2>
-                <p>On the forum you will find a big list of MagicMirror² enthusiasts. Share your ideas, ask your questions and get support. The perfect place for you to start.</p>
-                <p><br><a class="btn btn-primary" href="https://forum.magicmirror.builders" target="_blank">Visit the Forum &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container section">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center">
-                <h2>Watch the video:</h2>
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe src="https://player.vimeo.com/video/171152845" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <a id="magpi"></a>
-    <div class="container section">
-        <div class="row">
-            <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5 text-center">
-                <a href="https://magpi.raspberrypi.com/issues/50" target="_blank"><img src="img/magpi-best-watermark-custom.png" alt="MagPi Top 50" class="img-responsive"></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-                <h2>Voted number 1 in the MagPi Top 50!</h2>
-                <p class="lead">MagicMirror² is the winner in the official Raspberry Pi magazine’s 50th issue celebration feature voted by the Raspberry Pi community.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container section">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h2>Easy to install!</h2>
-                <p class="lead">
-                    Want to install MagicMirror² on your freshly installed Raspberry Pi?<br>Check out the installation instructions on our docs site:<br>
-                    <br>
-                    <a class="btn btn-primary btn-lg" href="https://docs.magicmirror.builders" target="_blank">
-                        <i class="fa fa-fw fa-book" aria-hidden="true"></i> docs.magicmirror.builders
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <a id="donate"></a>
-    <div class="container section">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h2>Enjoying MagicMirror? Consider a donation!</h2>
-                <p class="lead">MagicMirror² is opensource and free. That doesn't mean we don't need any money. </p>
-                <p>Please consider a donation to help us cover the ongoing costs like webservers and email services.<br>If we receive enough donations we might even be able to free up some working hours and spend some extra time improving the MagicMirror² core. <br><br></p>
-            </div>
-            <div class="col-md-6 col-md-offset-3">
-                <div class="text-center">
-                    <a href="https://magicmirror.builders/paypal" class="btn btn-primary btn-lg">
-                        <i class="fa fa-fw fa-paypal" aria-hidden="true"></i> Donate using PayPal
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container section banner-wrapper">
-        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CW7ILKQE&placement=docsmagicmirrorbuilders&format=cover" id="_carbonads_js"></script>
-    </div>
-
-    <div class="container section">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h3>Interested in developing your own modules?</h3>
+        <header class="jumbotron fade-in-up">
+            <div class="container text-center">
+                <h1 class="logo">MagicMirror<span class="two">²</span></h1>
+                <p class="lead payoff">The open source modular smart mirror platform.</p>
                 <p>
-                    MagicMirror² has an extensively documented API. It allows you to built your own module backed by a powerful backend.<br>
-                    Check out the <a href="https://docs.magicmirror.builders/development/introduction.html" target="_blank">API documentation</a> for more information and start developing today.
+                    <a href="https://bestpractices.coreinfrastructure.org/projects/347"><img src="https://bestpractices.coreinfrastructure.org/projects/347/badge" alt="Best practices badge"></a>
+                    <a href="https://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
                 </p>
+            </div>
+        </header>
+
+        <section class="container section links fade-in-up">
+            <div class="grid-4">
+                <div class="text-center fade-in-up">
+                    <i class="fa-brands fa-4x fa-github" aria-hidden="true"></i>
+                    <h2>Open Source</h2>
+                    <p>MagicMirror² is Open Source, free and maintained by a big group of enthusiasts. Got a nice idea? Send us a pull request and become a part of the big list of contributors.</p>
+                    <p><a class="btn btn-primary" href="https://github.com/MagicMirrorOrg/MagicMirror" target="_blank">Go to the Repository »</a></p>
+                </div>
+                <div class="text-center fade-in-up">
+                    <i class="fa-solid fa-4x fa-list" aria-hidden="true"></i>
+                    <h2>Modular</h2>
+                    <p>The core of MagicMirror² contains a strong API which allows 3rd party developers to build additional modules. Modules you can use. Modules you can develop.</p>
+                    <p><a class="btn btn-primary" href="https://modules.magicmirror.builders/" target="_blank">Check out the Modules »</a></p>
+                </div>
+                <div class="text-center fade-in-up">
+                    <i class="fa-solid fa-4x fa-book" aria-hidden="true"></i>
+                    <h2>Documented</h2>
+                    <p>Read our extensive documentation to find out everything you want to know about the MagicMirror² project. The full API description allows you to build your own modules.</p>
+                    <p><a class="btn btn-primary" href="https://docs.magicmirror.builders" target="_blank">Read the Docs »</a></p>
+                </div>
+                <div class="text-center fade-in-up">
+                    <i class="fa-solid fa-4x fa-users" aria-hidden="true"></i>
+                    <h2>Community driven</h2>
+                    <p>On the forum you will find a big list of MagicMirror² enthusiasts. Share your ideas, ask your questions and get support. The perfect place for you to start.</p>
+                    <p><a class="btn btn-primary" href="https://forum.magicmirror.builders" target="_blank">Visit the Forum »</a></p>
+                </div>
+            </div>
+            </section>
+
+            <section class="container section fade-in-up">
+                <div class="text-center">
+                    <h2>Watch the video:</h2>
+                    <div class="video-container">
+                        <iframe src="https://player.vimeo.com/video/171152845" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container section fade-in-up">
+                <div class="text-center">
+                    <h2>See it in action:</h2>
+                    <p class="text-muted" style="margin-bottom: 20px;"><small>Click to enlarge · Short demo recording</small></p>
+                    <div class="demo-container">
+                        <img src="img/demo.gif" alt="MagicMirror² Demo" class="demo-gif" id="demoGif" style="cursor: pointer;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modal for demo GIF -->
+            <div id="demoModal" class="modal">
+                <span class="modal-close">&times;</span>
+                <img class="modal-content" id="modalImg" alt="MagicMirror² Demo">
+            </div>
+
+            <section id="magpi" class="container section text-center fade-in-up">
+                <div class="magpi-logo">
+                    <a href="https://magpi.raspberrypi.com/issues/50" target="_blank"><img src="img/magpi-best-watermark-custom.png" class="magpi-image" alt="MagPi Top 50"></a>
+                </div>
+                <div class="centered-content">
+                    <h2>Voted number 1 in the MagPi Top 50!</h2>
+                    <p class="lead">MagicMirror² is the winner in the official Raspberry Pi magazine's 50th issue celebration feature voted by the Raspberry Pi community.</p>
+                </div>
+            </section>
+
+            <section class="container section text-center fade-in-up">
+                <h2>Easy to install!</h2>
+                <p class="lead">Want to install MagicMirror² on your freshly installed Raspberry Pi?<br>Check out the installation instructions on our docs site:</p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="https://docs.magicmirror.builders" target="_blank">
+                        <i class="fa-solid fa-fw fa-book" aria-hidden="true"></i> docs.magicmirror.builders
+                    </a>
+                </p>
+            </section>
+
+            <section id="donate" class="container section text-center fade-in-up">
+                <h2>Enjoying MagicMirror? Consider a donation!</h2>
+                <p class="lead">MagicMirror² is open source and free. That doesn't mean we don't need any money.</p>
+                <p>Please consider a donation to help us cover the ongoing costs like webservers and email services.<br>If we receive enough donations we might even be able to free up some working hours and spend some extra time improving the MagicMirror² core.</p>
+                <div class="centered-content">
+                    <a href="https://magicmirror.builders/paypal" class="btn btn-primary btn-lg">
+                        <i class="fa-brands fa-fw fa-paypal" aria-hidden="true"></i> Donate using PayPal
+                    </a>
+                </div>
+            </section>
+
+            <section class="container section text-center fade-in-up">
+                <h3>Interested in developing your own modules?</h3>
+                <p>MagicMirror² has an extensively documented API. It allows you to built your own module backed by a powerful backend.<br>Check out the <a href="https://docs.magicmirror.builders/development/introduction.html" target="_blank">API documentation</a> for more information and start developing today.</p>
 
                 <h3>Interested in similar projects?</h3>
                 <p>
                     Check out the <a href="https://michaelteeuw.nl" target="_blank">Blog of Michael Teeuw</a>, creator of the MagicMirror² project. Or follow Michael on <a href="https://twitter.com/michmich" target="_blank">Twitter</a> and <a href="https://www.instagram.com/michaelteeuw/" target="_blank">Instagram</a>.
                 </p>
-            </div>
-        </div>
-    </div>
+            </section>
 
-    <div class="container section">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <img src="img/explode.png" class="img-responsive" alt="MagicMirror example frame">
-            </div>
-        </div>
-    </div>
+            <section class="container section text-center fade-in-up">
+                <img src="img/explode.png" class="responsive-img" alt="MagicMirror example frame">
+            </section>
+    </main>
 
-    <div class="container-fluid footer">
+    <footer class="footer">
         <div class="container text-center">
-            &copy;2016 <a href="https://michaelteeuw.nl" target="_blank">Michael Teeuw</a>, Xonay Media. Video by <a href="https://paulvincentroll.com" target="_blank">Paul-Vincent Roll</a>.
+            ©2016 <a href="https://michaelteeuw.nl" target="_blank">Michael Teeuw</a>, Xonay Media. Video by <a href="https://paulvincentroll.com" target="_blank">Paul-Vincent Roll</a>.
         </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </footer>
 </body>
+
 </html>
