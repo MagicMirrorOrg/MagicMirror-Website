@@ -216,7 +216,8 @@ a:hover {
 /* Jumbotron */
 .jumbotron {
     background-image: url('img/mirror.png');
-    background-position: 600px -100px;
+    background-size: clamp(550px, 65vw, 1200px) auto;
+    background-position: bottom clamp(-425px, 90%, -200px) right -15em;
     background-repeat: no-repeat;
     background-color: var(--bg-secondary);
     padding: clamp(30px, 8vw, 50px) 15px;
@@ -226,12 +227,6 @@ a:hover {
 
 .jumbotron h1 {
     margin-top: 0;
-}
-
-@media (max-width: 825px) {
-    .jumbotron {
-        background-image: none;
-    }
 }
 
 /* Grid system */
