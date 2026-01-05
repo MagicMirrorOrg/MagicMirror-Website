@@ -314,7 +314,8 @@ a:hover {
 }
 
 @media (max-width: 825px) {
-    .video-container {
+    .video-container,
+    .demo-container {
         max-width: 100%;
     }
 }
