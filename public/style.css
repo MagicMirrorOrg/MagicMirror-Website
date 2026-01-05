@@ -66,20 +66,19 @@ a:hover {
     background: var(--bg-primary);
     border-top: 7px solid var(--accent-color);
     position: relative;
+    z-index: 500;
 }
 
 .navbar-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 80px;
     padding: 0 15px;
 }
 
 .navbar-header {
     display: flex;
     align-items: center;
-    height: 80px;
 }
 
 .navbar-brand {
@@ -147,6 +146,7 @@ a:hover {
         width: 100%;
         justify-content: space-between;
         flex-direction: row-reverse;
+        height: 60px;
     }
     
     .navbar-toggle {
@@ -375,27 +375,43 @@ a:hover {
     height: auto;
 }
 
+a:has(.magpi-floating) {
+    display: block;
+    text-align: center;
+    line-height: 0;
+    position: relative;
+}
+
 .magpi-floating {
     position: absolute;
     z-index: 9999;
-    top: 30px;
-    right: 50%;
-    width: clamp(60px, 12vw, 125px);
+    top: -55px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: clamp(80px, 20vw, 120px);
     animation-name: appear;
     animation-duration: 2s;
     animation-delay: 1s;
     transform: scale(0,0);
     animation-fill-mode: forwards;
-    transform-origin: 100% 50%;
-    filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
 }
 
 @keyframes appear {
     from {
-        transform: scale(0,0) rotate(30deg) translateX(50%);
+        transform: scale(0,0) rotate(30deg);
     }
     to {
-        transform: scale(1,1) rotate(-1deg) translateX(50%);
+        transform: scale(1,1) rotate(-1deg);
+    }
+}
+
+@media (max-width: 1500px) {
+
+
+    .jumbotron {
+        margin-top: 35px;
     }
 }
 
@@ -455,8 +471,8 @@ p {
     border: 0;
     background-image: linear-gradient(100deg, rgb(0, 112, 186), rgb(0, 48, 135));
     color: white !important;
-    margin-top: 20px;
-    line-height: 40px !important;
+    line-height: 40px;
+    margin: 20px 0;
 }
 
 .theme-toggle {
@@ -465,9 +481,10 @@ p {
     color: var(--text-tertiary);
     cursor: pointer;
     padding: 0 14px;
-    line-height: 80px;
     font-size: 16px;
     transition: color 0.3s;
+    line-height: 40px;
+    margin: 20px 0;
 }
 
 .theme-toggle:hover {
@@ -477,7 +494,13 @@ p {
 @media (max-width: 825px) {
     .nav-donate a {
         border-radius: 0;
+        line-height: inherit;
         margin: 0;
+    }
+
+    .theme-toggle {
+        line-height: inherit;
+        border-top: 1px solid var(--border-color
     }
 }
 
